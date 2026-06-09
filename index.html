@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Cadastro CPStream</title>
-<script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
@@ -355,11 +355,13 @@ function atualizarBoleto(){
   // Gerar QR Code
   var qrdiv = document.getElementById('qrcode');
   qrdiv.innerHTML='';
-  QRCode.toCanvas(document.createElement('canvas'), payload, {
-    width:180, margin:1,
-    color:{dark:'#0D2B55',light:'#FFFFFF'}
-  }, function(err, canvas){
-    if(!err){ qrdiv.appendChild(canvas); }
+  new QRCode(qrdiv, {
+    text: payload,
+    width: 180,
+    height: 180,
+    colorDark: '#0D2B55',
+    colorLight: '#FFFFFF',
+    correctLevel: QRCode.CorrectLevel.M
   });
 
   document.getElementById('boleto-section').style.display='block';
