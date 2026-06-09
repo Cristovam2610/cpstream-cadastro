@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cadastro CPStream</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Arial,sans-serif;background:#E8EFF8;min-height:100vh;padding:12px}
+.wrap{max-width:480px;margin:0 auto}
+.header{background:#0D2B55;border:2px solid #F9A825;border-radius:10px 10px 0 0;padding:14px 12px 8px;text-align:center}
+.header h1{font-size:19px;font-weight:700;color:#fff}
+.header p{font-size:11px;color:#B8D0F0;margin-top:3px}
+.subbar{background:#1565C0;border:1px solid #F9A825;border-top:none;padding:6px 12px;text-align:center}
+.subbar span{font-size:11px;color:#D6E4F7}
+.sec-hdr{background:#0D2B55;color:#fff;font-size:12px;font-weight:700;padding:6px 10px;margin-top:9px;border-radius:6px 6px 0 0}
+.sec-body{border:1px solid #3A7BD5;border-top:none;border-radius:0 0 6px 6px;padding:10px;background:#fff}
+.field-row{display:flex;align-items:center;gap:6px;margin-bottom:8px}
+.field-row:last-child{margin-bottom:0}
+.field-row label{font-size:11px;font-weight:700;color:#0D2B55;min-width:90px;flex-shrink:0}
+.field-row input,.field-row select{flex:1;font-size:12px;padding:6px 8px;border:1px solid #3A7BD5;border-radius:5px;background:#F0F4FB;color:#111;height:32px;min-width:0}
+.field-row input:focus{outline:none;border-color:#0D2B55;background:#fff}
+.row2{display:flex;flex-direction:column;gap:6px;margin-bottom:8px}
+.row2 .field-row{margin-bottom:0}
+.cb-row{display:flex;align-items:flex-start;gap:6px;margin-bottom:8px}
+.cb-row:last-child{margin-bottom:0}
+.cb-lbl{font-size:11px;font-weight:700;color:#0D2B55;min-width:80px;flex-shrink:0;padding-top:6px}
+.cb-group{flex:1;background:#F0F4FB;border:1px solid #3A7BD5;border-radius:5px;padding:6px 8px;display:flex;flex-wrap:wrap;gap:6px 14px}
+.cb-item{display:flex;align-items:center;gap:5px;font-size:12px;color:#111;cursor:pointer}
+.cb-item input[type=checkbox]{width:15px;height:15px;accent-color:#1565C0;cursor:pointer}
+.price-tbl{width:100%;border-collapse:collapse;font-size:11px;margin-bottom:8px}
+.price-tbl th{background:#1565C0;color:#fff;padding:5px 6px;text-align:center;font-weight:700}
+.price-tbl td{padding:5px 6px;text-align:center;border:1px solid #BBCCE8}
+.price-tbl tr:nth-child(even) td{background:#D6E4F7}
+.price-tbl tr:nth-child(odd) td{background:#fff}
+.price-tbl td:first-child{font-weight:700;color:#1565C0}
+.pix-bar{background:#0D2B55;border:1px solid #F9A825;border-radius:6px;padding:8px 10px;display:flex;justify-content:space-between;align-items:center}
+.pix-bar span:first-child{font-size:11px;color:#fff;font-weight:700}
+.pix-bar span:last-child{font-size:12px;color:#F9A825;font-weight:700}
+.pkg-sel{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:8px}
+.pkg-btn{border:1px solid #3A7BD5;border-radius:6px;padding:7px;text-align:center;cursor:pointer;background:#F0F4FB;font-size:12px;color:#0D2B55;font-weight:600;transition:all 0.15s;user-select:none}
+.pkg-btn.sel{background:#1565C0;color:#fff;border-color:#1565C0}
+.per-sel{display:flex;gap:6px;flex-wrap:wrap}
+.per-btn{border:1px solid #3A7BD5;border-radius:6px;padding:6px 10px;cursor:pointer;background:#F0F4FB;font-size:12px;color:#0D2B55;font-weight:600;flex:1;text-align:center;transition:all 0.15s;user-select:none}
+.per-btn.sel{background:#1565C0;color:#fff;border-color:#1565C0}
+.sub-lbl{font-size:11px;font-weight:700;color:#0D2B55;margin-bottom:6px}
+.note{font-size:10px;color:#555;font-style:italic;margin-bottom:7px;line-height:1.5}
+.notice{background:#D6E4F7;border:1px solid #3A7BD5;border-radius:6px;padding:8px 10px;font-size:11px;color:#0D2B55;text-align:center;line-height:1.6;margin-top:9px}
+.footer-bar{background:#0D2B55;border:1px solid #F9A825;border-radius:6px;padding:8px 10px;display:flex;justify-content:space-around;margin-top:8px;flex-wrap:wrap;gap:4px}
+.footer-bar span{font-size:11px;color:#F9A825;font-weight:700}
+.thanks{text-align:center;font-size:13px;font-weight:700;color:#0D2B55;margin-top:9px;margin-bottom:4px}
+.btn-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+.btn-send{background:#0D2B55;color:#fff;border:none;border-radius:8px;padding:13px;font-size:14px;font-weight:700;cursor:pointer;width:100%}
+.btn-send:active{opacity:0.8}
+.btn-clear{background:#fff;color:#C62828;border:2px solid #C62828;border-radius:8px;padding:13px;font-size:14px;font-weight:700;cursor:pointer;width:100%}
+.btn-clear:active{opacity:0.75}
+.toast{display:none;border-radius:8px;padding:11px 14px;text-align:center;font-size:12px;margin-top:9px;line-height:1.6;font-weight:600;color:#fff}
+.toast.show{display:block}
+.ind-box{background:#FFF8E1;border:1px solid #F9A825;border-radius:0 0 6px 6px;padding:10px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="header">
+    <h1>&#128203; Cadastro CPStream</h1>
+    <p>Formulário de Contratação de Serviço de Streaming</p>
+  </div>
+  <div class="subbar"><span>Preencha todos os campos e toque em Enviar</span></div>
+
+  <!-- DADOS DO CLIENTE -->
+  <div class="sec-hdr">&#128100; DADOS DO CLIENTE</div>
+  <div class="sec-body">
+    <div class="field-row"><label>Nome Completo:</label><input id="nome" type="text" placeholder="Nome e sobrenome"></div>
+    <div class="row2">
+      <div class="field-row"><label>Tel / Zap:</label><input id="tel" type="tel" placeholder="(71) 9 8000-0000"></div>
+      <div class="field-row"><label>Data Contrat.:</label><input id="data" type="date"></div>
+    </div>
+    <div class="field-row"><label>E-mail:</label><input id="email" type="email" placeholder="nome@email.com"></div>
+  </div>
+
+  <!-- INDICAÇÃO / COLABORADOR -->
+  <div class="sec-hdr">&#11088; INDICAÇÃO / COLABORADOR</div>
+  <div class="ind-box">
+    <div class="field-row"><label>Nome do Vendedor:</label><input id="ind-nome" type="text" placeholder="Nome completo do colaborador"></div>
+    <div class="field-row"><label>PIX do Vendedor:</label><input id="ind-pix" type="text" placeholder="CPF, e-mail, tel ou chave PIX"></div>
+  </div>
+
+  <!-- EQUIPAMENTOS -->
+  <div class="sec-hdr">&#128250; EQUIPAMENTOS</div>
+  <div class="sec-body">
+    <div class="cb-row">
+      <span class="cb-lbl">Smart TV:</span>
+      <div class="cb-group" id="tv-group">
+        <label class="cb-item"><input type="checkbox" value="LG"> LG</label>
+        <label class="cb-item"><input type="checkbox" value="Samsung"> Samsung</label>
+        <label class="cb-item"><input type="checkbox" value="TCL"> TCL</label>
+        <label class="cb-item"><input type="checkbox" value="Philips"> Philips</label>
+        <label class="cb-item"><input type="checkbox" value="AOC"> AOC</label>
+        <label class="cb-item"><input type="checkbox" value="Outras" id="cb-outras"> Outras</label>
+      </div>
+    </div>
+    <div class="field-row" id="outras-row" style="display:none"><label>Fabricante:</label><input id="fabricante" type="text" placeholder="Informe a marca"></div>
+    <div class="cb-row" style="margin-bottom:0">
+      <span class="cb-lbl">Dispositivos:</span>
+      <div class="cb-group">
+        <label class="cb-item"><input type="checkbox" id="cb-pc"> PC / Notebook Win 10/11</label>
+        <label class="cb-item"><input type="checkbox" id="cb-cel"> Celular Android</label>
+      </div>
+    </div>
+  </div>
+
+  <!-- PACOTES -->
+  <div class="sec-hdr">&#128176; PACOTES DISPONÍVEIS</div>
+  <div class="sec-body">
+    <table class="price-tbl">
+      <tr><th>Acessos</th><th>1 Mês / 30d</th><th>6 Meses / 180d</th><th>1 Ano / 365d</th></tr>
+      <tr><td>02</td><td>R$ 20,00</td><td>R$ 110,00</td><td>R$ 200,00</td></tr>
+      <tr><td>04</td><td>R$ 38,00</td><td>R$ 200,00</td><td>R$ 400,00</td></tr>
+      <tr><td>06</td><td>R$ 56,00</td><td>R$ 300,00</td><td>R$ 600,00</td></tr>
+      <tr><td>10</td><td>R$ 90,00</td><td>R$ 500,00</td><td>R$ 900,00</td></tr>
+    </table>
+    <div class="pix-bar">
+      <span>&#128179; Pagamento via PIX:</span>
+      <span>criador.mql5@gmail.com</span>
+    </div>
+  </div>
+
+  <!-- PACOTE CONTRATADO -->
+  <div class="sec-hdr">&#9989; PACOTE CONTRATADO</div>
+  <div class="sec-body">
+    <div class="sub-lbl">Nº de Acessos:</div>
+    <div class="pkg-sel">
+      <div class="pkg-btn" onclick="selPkg(this,'02')">02 acessos</div>
+      <div class="pkg-btn" onclick="selPkg(this,'04')">04 acessos</div>
+      <div class="pkg-btn" onclick="selPkg(this,'06')">06 acessos</div>
+      <div class="pkg-btn" onclick="selPkg(this,'10')">10 acessos</div>
+    </div>
+    <div class="sub-lbl">Período:</div>
+    <div class="per-sel">
+      <div class="per-btn" onclick="selPer(this,'1 Mês (30 dias)')">1 Mês</div>
+      <div class="per-btn" onclick="selPer(this,'6 Meses (180 dias)')">6 Meses</div>
+      <div class="per-btn" onclick="selPer(this,'1 Ano (365 dias)')">1 Ano</div>
+    </div>
+  </div>
+
+  <!-- CREDENCIAIS -->
+  <div class="sec-hdr">&#128272; CREDENCIAIS DE ACESSO</div>
+  <div class="sec-body">
+    <p class="note">Senha: 8–12 caracteres com Maiúscula, minúscula, número e especial ( @ . % $ # ? ! )</p>
+    <div class="row2">
+      <div class="field-row"><label>Login:</label><input id="login" type="text" placeholder="nome.sobrenome"></div>
+      <div class="field-row"><label>Senha:</label><input id="senha" type="text" placeholder="Ex: Senha@2025"></div>
+    </div>
+  </div>
+
+  <div class="notice">&#8505;&#65039; Acesso enviado por <strong>WhatsApp ou e-mail</strong> após confirmação do <strong>PIX</strong></div>
+
+  <div class="footer-bar">
+    <span>&#128231; criador.mql5@gmail.com</span>
+    <span>&#128241; (71) 9 8534-4834</span>
+  </div>
+
+  <div class="thanks">Obrigado por contratar nossos serviços! &#128591;</div>
+
+  <div class="btn-row">
+    <button class="btn-send" onclick="enviar()">&#128228; Enviar</button>
+    <button class="btn-clear" onclick="limpar()">&#10006; Limpar</button>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+</div>
+
+<script>
+var pkgSel='', perSel='';
+
+function selPkg(el,v){
+  document.querySelectorAll('.pkg-btn').forEach(function(b){b.classList.remove('sel')});
+  el.classList.add('sel'); pkgSel=v;
+}
+function selPer(el,v){
+  document.querySelectorAll('.per-btn').forEach(function(b){b.classList.remove('sel')});
+  el.classList.add('sel'); perSel=v;
+}
+
+document.getElementById('cb-outras').addEventListener('change',function(){
+  document.getElementById('outras-row').style.display=this.checked?'flex':'none';
+});
+
+function g(id){return document.getElementById(id).value.trim();}
+
+function enviar(){
+  var nome=g('nome'), tel=g('tel'), email=g('email'), data=g('data');
+  var indNome=g('ind-nome'), indPix=g('ind-pix');
+  if(!nome||!tel||!email){
+    toast('⚠️ Preencha Nome, Telefone e E-mail antes de enviar.','#B71C1C'); return;
+  }
+  if(!pkgSel||!perSel){
+    toast('⚠️ Selecione o Pacote e o Período contratado.','#B71C1C'); return;
+  }
+  var tvs=[...document.querySelectorAll('#tv-group input:checked')].map(function(c){return c.value}).join(', ');
+  var fab=g('fabricante');
+  var disp=[];
+  if(document.getElementById('cb-pc').checked) disp.push('PC/Notebook Win 10/11');
+  if(document.getElementById('cb-cel').checked) disp.push('Celular Android');
+  var dataFmt=data?new Date(data+'T12:00:00').toLocaleDateString('pt-BR'):'Não informada';
+
+  var msg='📋 *CADASTRO CPSTREAM*\n';
+  msg+='━━━━━━━━━━━━━━━━━━━\n';
+  msg+='👤 *DADOS DO CLIENTE*\n';
+  msg+='• Nome: '+nome+'\n';
+  msg+='• Tel/Zap: '+tel+'\n';
+  msg+='• E-mail: '+email+'\n';
+  msg+='• Data Contratação: '+dataFmt+'\n\n';
+  if(indNome||indPix){
+    msg+='⭐ *INDICAÇÃO / COLABORADOR*\n';
+    if(indNome) msg+='• Vendedor: '+indNome+'\n';
+    if(indPix)  msg+='• PIX Vendedor: '+indPix+'\n';
+    msg+='\n';
+  }
+  msg+='📺 *EQUIPAMENTOS*\n';
+  msg+='• Smart TV: '+(tvs||'Nenhuma')+(fab?' ('+fab+')':'')+'\n';
+  msg+='• Dispositivos: '+(disp.length?disp.join(', '):'Nenhum')+'\n\n';
+  msg+='✅ *PACOTE CONTRATADO*\n';
+  msg+='• Acessos: '+pkgSel+'\n';
+  msg+='• Período: '+perSel+'\n\n';
+  msg+='🔐 *CREDENCIAIS*\n';
+  msg+='• Login: '+(g('login')||'A definir')+'\n';
+  msg+='• Senha: '+(g('senha')||'A definir')+'\n';
+  msg+='━━━━━━━━━━━━━━━━━━━';
+
+  if(navigator.share){
+    navigator.share({title:'Cadastro CPStream',text:msg})
+      .then(function(){toast('✅ Cadastro enviado com sucesso!','#1B5E20')})
+      .catch(function(){copiar(msg)});
+  } else { copiar(msg); }
+}
+
+function copiar(txt){
+  if(navigator.clipboard){
+    navigator.clipboard.writeText(txt)
+      .then(function(){toast('✅ Cadastro copiado!\nCole no WhatsApp ou e-mail.','#1B5E20')})
+      .catch(function(){toast('✅ Pronto! Compartilhe pelo celular.','#1B5E20')});
+  } else { toast('✅ Pronto! Compartilhe pelo celular.','#1B5E20'); }
+}
+
+function limpar(){
+  ['nome','tel','email','data','fabricante','login','senha','ind-nome','ind-pix'].forEach(function(id){
+    var el=document.getElementById(id); if(el) el.value='';
+  });
+  document.querySelectorAll('input[type=checkbox]').forEach(function(c){c.checked=false});
+  document.getElementById('outras-row').style.display='none';
+  document.querySelectorAll('.pkg-btn,.per-btn').forEach(function(b){b.classList.remove('sel')});
+  pkgSel=''; perSel='';
+  toast('🧹 Formulário limpo. Pronto para novo cadastro!','#0D2B55');
+}
+
+function toast(msg,cor){
+  var t=document.getElementById('toast');
+  t.style.background=cor; t.textContent=msg;
+  t.className='toast show';
+  setTimeout(function(){t.className='toast'},3500);
+}
+</script>
+</body>
+</html>
