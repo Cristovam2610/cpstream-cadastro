@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Cadastro CPStream</title>
+<script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:Arial,sans-serif;background:#E8EFF8;min-height:100vh;padding:12px}
@@ -11,14 +13,16 @@ body{font-family:Arial,sans-serif;background:#E8EFF8;min-height:100vh;padding:12
 .header{background:#0D2B55;border:2px solid #F9A825;border-radius:10px 10px 0 0;padding:14px 12px 8px;text-align:center}
 .header h1{font-size:19px;font-weight:700;color:#fff}
 .header p{font-size:11px;color:#B8D0F0;margin-top:3px}
-.subbar{background:#1565C0;border:1px solid #F9A825;border-top:none;padding:6px 12px;text-align:center}
+.subbar{background:#1565C0;border:1px solid #F9A825;border-top:none;padding:6px 12px;text-align:center;margin-bottom:9px;border-radius:0 0 6px 6px}
 .subbar span{font-size:11px;color:#D6E4F7}
 .sec-hdr{background:#0D2B55;color:#fff;font-size:12px;font-weight:700;padding:6px 10px;margin-top:9px;border-radius:6px 6px 0 0}
+.sec-hdr.amber{background:#F9A825;color:#5D4037}
 .sec-body{border:1px solid #3A7BD5;border-top:none;border-radius:0 0 6px 6px;padding:10px;background:#fff}
+.sec-body.amber{border-color:#F9A825;background:#FFF8E1}
 .field-row{display:flex;align-items:center;gap:6px;margin-bottom:8px}
 .field-row:last-child{margin-bottom:0}
 .field-row label{font-size:11px;font-weight:700;color:#0D2B55;min-width:90px;flex-shrink:0}
-.field-row input,.field-row select{flex:1;font-size:12px;padding:6px 8px;border:1px solid #3A7BD5;border-radius:5px;background:#F0F4FB;color:#111;height:32px;min-width:0}
+.field-row input{flex:1;font-size:12px;padding:6px 8px;border:1px solid #3A7BD5;border-radius:5px;background:#F0F4FB;color:#111;height:32px;min-width:0}
 .field-row input:focus{outline:none;border-color:#0D2B55;background:#fff}
 .row2{display:flex;flex-direction:column;gap:6px;margin-bottom:8px}
 .row2 .field-row{margin-bottom:0}
@@ -56,7 +60,36 @@ body{font-family:Arial,sans-serif;background:#E8EFF8;min-height:100vh;padding:12
 .btn-clear:active{opacity:0.75}
 .toast{display:none;border-radius:8px;padding:11px 14px;text-align:center;font-size:12px;margin-top:9px;line-height:1.6;font-weight:600;color:#fff}
 .toast.show{display:block}
-.ind-box{background:#FFF8E1;border:1px solid #F9A825;border-radius:0 0 6px 6px;padding:10px}
+
+/* BOLETO */
+#boleto-section{display:none;margin-top:12px}
+.boleto{background:#fff;border:2px solid #0D2B55;border-radius:10px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,0.15)}
+.boleto-header{background:#0D2B55;padding:12px 14px;display:flex;justify-content:space-between;align-items:center}
+.boleto-header .logo{color:#F9A825;font-size:16px;font-weight:900;letter-spacing:1px}
+.boleto-header .tipo{color:#B8D0F0;font-size:10px;text-align:right}
+.boleto-linha-amarela{height:4px;background:#F9A825}
+.boleto-body{padding:14px}
+.boleto-titulo{font-size:11px;color:#888;font-weight:600;margin-bottom:2px;text-transform:uppercase;letter-spacing:0.5px}
+.boleto-desc{font-size:13px;color:#0D2B55;font-weight:700;margin-bottom:10px}
+.boleto-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}
+.boleto-item{background:#F0F4FB;border-radius:6px;padding:7px 9px}
+.boleto-item .lbl{font-size:9px;color:#888;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:2px}
+.boleto-item .val{font-size:12px;color:#0D2B55;font-weight:700}
+.boleto-valor-box{background:#0D2B55;border-radius:8px;padding:10px 14px;text-align:center;margin-bottom:12px}
+.boleto-valor-box .lbl{font-size:10px;color:#B8D0F0;margin-bottom:3px}
+.boleto-valor-box .valor{font-size:26px;font-weight:900;color:#F9A825;letter-spacing:1px}
+.boleto-divisor{border:none;border-top:1px dashed #BBCCE8;margin:10px 0}
+.boleto-pix-titulo{font-size:11px;font-weight:700;color:#0D2B55;margin-bottom:8px;text-align:center}
+.qr-area{display:flex;flex-direction:column;align-items:center;gap:8px;margin-bottom:10px}
+#qrcode canvas,#qrcode img{border-radius:8px;border:3px solid #0D2B55}
+.pix-chave-box{background:#F0F4FB;border:1px solid #3A7BD5;border-radius:6px;padding:8px 10px;margin-bottom:8px}
+.pix-chave-box .lbl{font-size:9px;color:#888;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:3px}
+.pix-payload{font-size:9px;color:#333;word-break:break-all;line-height:1.5;font-family:monospace}
+.btn-copiar{width:100%;background:#1565C0;color:#fff;border:none;border-radius:7px;padding:10px;font-size:13px;font-weight:700;cursor:pointer;margin-bottom:6px}
+.btn-copiar:active{opacity:0.8}
+.btn-whats{width:100%;background:#25D366;color:#fff;border:none;border-radius:7px;padding:10px;font-size:13px;font-weight:700;cursor:pointer}
+.btn-whats:active{opacity:0.8}
+.boleto-footer{background:#F0F4FB;border-top:1px solid #BBCCE8;padding:8px 14px;text-align:center;font-size:10px;color:#888}
 </style>
 </head>
 <body>
@@ -79,11 +112,11 @@ body{font-family:Arial,sans-serif;background:#E8EFF8;min-height:100vh;padding:12
     <div class="field-row"><label>E-mail:</label><input id="email" type="email" placeholder="nome@email.com"></div>
   </div>
 
-  <!-- INDICAÇÃO / COLABORADOR -->
-  <div class="sec-hdr">&#11088; INDICAÇÃO / COLABORADOR</div>
-  <div class="ind-box">
-    <div class="field-row"><label>Nome do Vendedor:</label><input id="ind-nome" type="text" placeholder="Nome completo do colaborador"></div>
-    <div class="field-row"><label>PIX do Vendedor:</label><input id="ind-pix" type="text" placeholder="CPF, e-mail, tel ou chave PIX"></div>
+  <!-- INDICAÇÃO -->
+  <div class="sec-hdr amber">&#11088; INDICAÇÃO / COLABORADOR</div>
+  <div class="sec-body amber">
+    <div class="field-row"><label>Nome Vendedor:</label><input id="ind-nome" type="text" placeholder="Nome completo do colaborador"></div>
+    <div class="field-row"><label>PIX Vendedor:</label><input id="ind-pix" type="text" placeholder="CPF, e-mail, tel ou chave PIX"></div>
   </div>
 
   <!-- EQUIPAMENTOS -->
@@ -92,20 +125,20 @@ body{font-family:Arial,sans-serif;background:#E8EFF8;min-height:100vh;padding:12
     <div class="cb-row">
       <span class="cb-lbl">Smart TV:</span>
       <div class="cb-group" id="tv-group">
-        <label class="cb-item"><input type="checkbox" value="LG"> LG</label>
-        <label class="cb-item"><input type="checkbox" value="Samsung"> Samsung</label>
-        <label class="cb-item"><input type="checkbox" value="TCL"> TCL</label>
-        <label class="cb-item"><input type="checkbox" value="Philips"> Philips</label>
-        <label class="cb-item"><input type="checkbox" value="AOC"> AOC</label>
-        <label class="cb-item"><input type="checkbox" value="Outras" id="cb-outras"> Outras</label>
+        <label class="cb-item"><input type="checkbox" value="LG" onchange="atualizarBoleto()"> LG</label>
+        <label class="cb-item"><input type="checkbox" value="Samsung" onchange="atualizarBoleto()"> Samsung</label>
+        <label class="cb-item"><input type="checkbox" value="TCL" onchange="atualizarBoleto()"> TCL</label>
+        <label class="cb-item"><input type="checkbox" value="Philips" onchange="atualizarBoleto()"> Philips</label>
+        <label class="cb-item"><input type="checkbox" value="AOC" onchange="atualizarBoleto()"> AOC</label>
+        <label class="cb-item"><input type="checkbox" value="Outras" id="cb-outras" onchange="toggleOutras()"> Outras</label>
       </div>
     </div>
     <div class="field-row" id="outras-row" style="display:none"><label>Fabricante:</label><input id="fabricante" type="text" placeholder="Informe a marca"></div>
     <div class="cb-row" style="margin-bottom:0">
       <span class="cb-lbl">Dispositivos:</span>
       <div class="cb-group">
-        <label class="cb-item"><input type="checkbox" id="cb-pc"> PC / Notebook Win 10/11</label>
-        <label class="cb-item"><input type="checkbox" id="cb-cel"> Celular Android</label>
+        <label class="cb-item"><input type="checkbox" id="cb-pc" onchange="atualizarBoleto()"> PC / Notebook Win 10/11</label>
+        <label class="cb-item"><input type="checkbox" id="cb-cel" onchange="atualizarBoleto()"> Celular Android</label>
       </div>
     </div>
   </div>
@@ -138,9 +171,9 @@ body{font-family:Arial,sans-serif;background:#E8EFF8;min-height:100vh;padding:12
     </div>
     <div class="sub-lbl">Período:</div>
     <div class="per-sel">
-      <div class="per-btn" onclick="selPer(this,'1 Mês (30 dias)')">1 Mês</div>
-      <div class="per-btn" onclick="selPer(this,'6 Meses (180 dias)')">6 Meses</div>
-      <div class="per-btn" onclick="selPer(this,'1 Ano (365 dias)')">1 Ano</div>
+      <div class="per-btn" onclick="selPer(this,'1 Mês (30 dias)','30')">1 Mês</div>
+      <div class="per-btn" onclick="selPer(this,'6 Meses (180 dias)','180')">6 Meses</div>
+      <div class="per-btn" onclick="selPer(this,'1 Ano (365 dias)','365')">1 Ano</div>
     </div>
   </div>
 
@@ -154,7 +187,57 @@ body{font-family:Arial,sans-serif;background:#E8EFF8;min-height:100vh;padding:12
     </div>
   </div>
 
-  <div class="notice">&#8505;&#65039; Acesso enviado por <strong>WhatsApp ou e-mail</strong> após confirmação do <strong>PIX</strong></div>
+  <!-- BOLETO PIX -->
+  <div id="boleto-section">
+    <div class="boleto">
+      <div class="boleto-header">
+        <div class="logo">CP STREAM</div>
+        <div class="tipo">Serviço de Streaming<br>Cobrança via PIX</div>
+      </div>
+      <div class="boleto-linha-amarela"></div>
+      <div class="boleto-body">
+        <div class="boleto-titulo">Descrição do Serviço</div>
+        <div class="boleto-desc">Serviço de Streaming CPStream</div>
+        <div class="boleto-grid">
+          <div class="boleto-item">
+            <div class="lbl">Nº de Acessos</div>
+            <div class="val" id="b-acessos">—</div>
+          </div>
+          <div class="boleto-item">
+            <div class="lbl">Período</div>
+            <div class="val" id="b-periodo">—</div>
+          </div>
+          <div class="boleto-item">
+            <div class="lbl">Equipamentos</div>
+            <div class="val" id="b-equip">—</div>
+          </div>
+          <div class="boleto-item">
+            <div class="lbl">Cliente</div>
+            <div class="val" id="b-cliente">—</div>
+          </div>
+        </div>
+        <div class="boleto-valor-box">
+          <div class="lbl">VALOR A PAGAR</div>
+          <div class="valor" id="b-valor">R$ 0,00</div>
+        </div>
+        <hr class="boleto-divisor">
+        <div class="boleto-pix-titulo">&#128179; Pague via PIX</div>
+        <div class="qr-area">
+          <div id="qrcode"></div>
+          <div style="font-size:10px;color:#888;text-align:center">Escaneie o QR Code<br>ou use o Pix Copia e Cola abaixo</div>
+        </div>
+        <div class="pix-chave-box">
+          <div class="lbl">PIX Copia e Cola</div>
+          <div class="pix-payload" id="pix-payload">—</div>
+        </div>
+        <button class="btn-copiar" onclick="copiarPix()">&#128203; Copiar PIX Copia e Cola</button>
+        <button class="btn-whats" onclick="enviarWhats()">&#128241; Enviar Cadastro + PIX pelo WhatsApp</button>
+      </div>
+      <div class="boleto-footer">CPStream &bull; criador.mql5@gmail.com &bull; (71) 9 8534-4834</div>
+    </div>
+  </div>
+
+  <div class="notice">&#8505;&#65039; Acesso liberado por <strong>WhatsApp ou e-mail</strong> após confirmação do <strong>PIX</strong></div>
 
   <div class="footer-bar">
     <span>&#128231; criador.mql5@gmail.com</span>
@@ -164,104 +247,238 @@ body{font-family:Arial,sans-serif;background:#E8EFF8;min-height:100vh;padding:12
   <div class="thanks">Obrigado por contratar nossos serviços! &#128591;</div>
 
   <div class="btn-row">
-    <button class="btn-send" onclick="enviar()">&#128228; Enviar</button>
+    <button class="btn-send" onclick="enviar()">&#128228; Enviar Cadastro</button>
     <button class="btn-clear" onclick="limpar()">&#10006; Limpar</button>
   </div>
 
   <div class="toast" id="toast"></div>
-
 </div>
 
 <script>
-var pkgSel='', perSel='';
+// EmailJS — substitua pelos seus IDs
+var EMAILJS_SERVICE  = 'service_ut3h2ic';
+var EMAILJS_TEMPLATE = 'template_bc13k4c';
+var EMAILJS_KEY      = 'AEUqKO5zt-5Ms9h6n';
+
+emailjs.init(EMAILJS_KEY);
+
+var pkgSel='', perSel='', perDias='';
+var precos={
+  '02':{'30':20,'180':110,'365':200},
+  '04':{'30':38,'180':200,'365':400},
+  '06':{'30':56,'180':300,'365':600},
+  '10':{'30':90,'180':500,'365':900}
+};
 
 function selPkg(el,v){
   document.querySelectorAll('.pkg-btn').forEach(function(b){b.classList.remove('sel')});
-  el.classList.add('sel'); pkgSel=v;
+  el.classList.add('sel'); pkgSel=v; atualizarBoleto();
 }
-function selPer(el,v){
+function selPer(el,v,dias){
   document.querySelectorAll('.per-btn').forEach(function(b){b.classList.remove('sel')});
-  el.classList.add('sel'); perSel=v;
+  el.classList.add('sel'); perSel=v; perDias=dias; atualizarBoleto();
+}
+function toggleOutras(){
+  var c=document.getElementById('cb-outras').checked;
+  document.getElementById('outras-row').style.display=c?'flex':'none';
+  atualizarBoleto();
 }
 
-document.getElementById('cb-outras').addEventListener('change',function(){
-  document.getElementById('outras-row').style.display=this.checked?'flex':'none';
-});
+function getEquip(){
+  var tvs=[...document.querySelectorAll('#tv-group input:checked')].map(function(c){return c.value});
+  var disp=[];
+  if(document.getElementById('cb-pc').checked) disp.push('PC/Notebook');
+  if(document.getElementById('cb-cel').checked) disp.push('Celular Android');
+  return tvs.concat(disp);
+}
+
+function getValor(){
+  if(!pkgSel||!perDias) return 0;
+  return precos[pkgSel][perDias]||0;
+}
+
+function formatVal(v){
+  return 'R$ '+v.toFixed(2).replace('.',',');
+}
+
+// ── Gerador de Payload PIX EMV ────────────────────────────────────────────────
+function pixPayload(chave, valor, nome, cidade){
+  function tlv(id, val){
+    var len=String(val.length).padStart(2,'0');
+    return id+len+val;
+  }
+  var merchantAccount = tlv('00','BR.GOV.BCB.PIX') + tlv('01', chave);
+  var ma = tlv('26', merchantAccount);
+  var valorStr = valor.toFixed(2);
+  var payload =
+    tlv('00','01') +
+    ma +
+    tlv('52','0000') +
+    tlv('53','986') +
+    tlv('54', valorStr) +
+    tlv('58','BR') +
+    tlv('59', nome.substring(0,25)) +
+    tlv('60', cidade.substring(0,15)) +
+    tlv('62', tlv('05','***'));
+  // CRC16
+  payload += '6304';
+  var crc = crc16(payload);
+  return payload + crc;
+}
+
+function crc16(str){
+  var crc=0xFFFF;
+  for(var i=0;i<str.length;i++){
+    crc^=str.charCodeAt(i)<<8;
+    for(var j=0;j<8;j++){
+      crc=(crc&0x8000)?(crc<<1)^0x1021:(crc<<1);
+    }
+  }
+  return ((crc&0xFFFF).toString(16).toUpperCase()).padStart(4,'0');
+}
+
+function atualizarBoleto(){
+  if(!pkgSel||!perDias) return;
+  var valor = getValor();
+  var equip = getEquip();
+  var nome  = document.getElementById('nome').value.trim()||'Cliente';
+
+  document.getElementById('b-acessos').textContent = pkgSel+' acessos';
+  document.getElementById('b-periodo').textContent = perSel;
+  document.getElementById('b-equip').textContent   = equip.length?equip.join(', '):'Não informado';
+  document.getElementById('b-cliente').textContent = nome.split(' ')[0]||'—';
+  document.getElementById('b-valor').textContent   = formatVal(valor);
+
+  var payload = pixPayload('criador.mql5@gmail.com', valor, 'CPStream', 'Salvador');
+  document.getElementById('pix-payload').textContent = payload;
+
+  // Gerar QR Code
+  var qrdiv = document.getElementById('qrcode');
+  qrdiv.innerHTML='';
+  QRCode.toCanvas(document.createElement('canvas'), payload, {
+    width:180, margin:1,
+    color:{dark:'#0D2B55',light:'#FFFFFF'}
+  }, function(err, canvas){
+    if(!err){ qrdiv.appendChild(canvas); }
+  });
+
+  document.getElementById('boleto-section').style.display='block';
+  setTimeout(function(){
+    document.getElementById('boleto-section').scrollIntoView({behavior:'smooth',block:'start'});
+  },100);
+}
+
+function copiarPix(){
+  var txt=document.getElementById('pix-payload').textContent;
+  if(navigator.clipboard){
+    navigator.clipboard.writeText(txt)
+      .then(function(){toast('✅ PIX Copia e Cola copiado!\nCole no app do banco.','#1B5E20')})
+      .catch(function(){toast('Copie manualmente o código acima.','#E65100')});
+  }
+}
 
 function g(id){return document.getElementById(id).value.trim();}
 
-function enviar(){
-  var nome=g('nome'), tel=g('tel'), email=g('email'), data=g('data');
-  var indNome=g('ind-nome'), indPix=g('ind-pix');
-  if(!nome||!tel||!email){
-    toast('⚠️ Preencha Nome, Telefone e E-mail antes de enviar.','#B71C1C'); return;
-  }
-  if(!pkgSel||!perSel){
-    toast('⚠️ Selecione o Pacote e o Período contratado.','#B71C1C'); return;
-  }
-  var tvs=[...document.querySelectorAll('#tv-group input:checked')].map(function(c){return c.value}).join(', ');
-  var fab=g('fabricante');
-  var disp=[];
-  if(document.getElementById('cb-pc').checked) disp.push('PC/Notebook Win 10/11');
-  if(document.getElementById('cb-cel').checked) disp.push('Celular Android');
-  var dataFmt=data?new Date(data+'T12:00:00').toLocaleDateString('pt-BR'):'Não informada';
-
-  var msg='📋 *CADASTRO CPSTREAM*\n';
-  msg+='━━━━━━━━━━━━━━━━━━━\n';
-  msg+='👤 *DADOS DO CLIENTE*\n';
-  msg+='• Nome: '+nome+'\n';
-  msg+='• Tel/Zap: '+tel+'\n';
-  msg+='• E-mail: '+email+'\n';
-  msg+='• Data Contratação: '+dataFmt+'\n\n';
-  if(indNome||indPix){
-    msg+='⭐ *INDICAÇÃO / COLABORADOR*\n';
-    if(indNome) msg+='• Vendedor: '+indNome+'\n';
-    if(indPix)  msg+='• PIX Vendedor: '+indPix+'\n';
-    msg+='\n';
-  }
-  msg+='📺 *EQUIPAMENTOS*\n';
-  msg+='• Smart TV: '+(tvs||'Nenhuma')+(fab?' ('+fab+')':'')+'\n';
-  msg+='• Dispositivos: '+(disp.length?disp.join(', '):'Nenhum')+'\n\n';
-  msg+='✅ *PACOTE CONTRATADO*\n';
-  msg+='• Acessos: '+pkgSel+'\n';
-  msg+='• Período: '+perSel+'\n\n';
-  msg+='🔐 *CREDENCIAIS*\n';
-  msg+='• Login: '+(g('login')||'A definir')+'\n';
-  msg+='• Senha: '+(g('senha')||'A definir')+'\n';
-  msg+='━━━━━━━━━━━━━━━━━━━';
-
-  if(navigator.share){
-    navigator.share({title:'Cadastro CPStream',text:msg})
-      .then(function(){toast('✅ Cadastro enviado com sucesso!','#1B5E20')})
-      .catch(function(){copiar(msg)});
-  } else { copiar(msg); }
+function montarMensagem(){
+  var equip=getEquip();
+  var dataFmt=g('data')?new Date(g('data')+'T12:00:00').toLocaleDateString('pt-BR'):'Não informada';
+  return '📋 *NOVO CADASTRO CPSTREAM*\n'+
+    '━━━━━━━━━━━━━━━━━━━\n'+
+    '👤 *CLIENTE*\n'+
+    '• Nome: '+g('nome')+'\n'+
+    '• Tel/Zap: '+g('tel')+'\n'+
+    '• E-mail: '+g('email')+'\n'+
+    '• Data: '+dataFmt+'\n\n'+
+    (g('ind-nome')?'⭐ *COLABORADOR*\n• Vendedor: '+g('ind-nome')+'\n• PIX: '+g('ind-pix')+'\n\n':'')+
+    '📺 *EQUIPAMENTOS*\n'+
+    '• '+( equip.length?equip.join(', '):'Não informado')+'\n\n'+
+    '✅ *PACOTE*\n'+
+    '• Acessos: '+pkgSel+'\n'+
+    '• Período: '+perSel+'\n'+
+    '• Valor: '+formatVal(getValor())+'\n\n'+
+    '🔐 *CREDENCIAIS*\n'+
+    '• Login: '+(g('login')||'A definir')+'\n'+
+    '• Senha: '+(g('senha')||'A definir')+'\n'+
+    '━━━━━━━━━━━━━━━━━━━';
 }
 
-function copiar(txt){
-  if(navigator.clipboard){
-    navigator.clipboard.writeText(txt)
-      .then(function(){toast('✅ Cadastro copiado!\nCole no WhatsApp ou e-mail.','#1B5E20')})
-      .catch(function(){toast('✅ Pronto! Compartilhe pelo celular.','#1B5E20')});
-  } else { toast('✅ Pronto! Compartilhe pelo celular.','#1B5E20'); }
+function enviarWhats(){
+  if(!pkgSel||!perDias){toast('Selecione pacote e período.','#B71C1C');return;}
+  var msg=montarMensagem();
+  if(navigator.share){
+    navigator.share({title:'Cadastro CPStream',text:msg})
+      .then(function(){enviarEmail();})
+      .catch(function(){});
+  } else {
+    if(navigator.clipboard) navigator.clipboard.writeText(msg);
+    toast('✅ Mensagem copiada!\nCole no WhatsApp.','#1B5E20');
+    enviarEmail();
+  }
+}
+
+function enviar(){
+  var nome=g('nome'),tel=g('tel'),email=g('email');
+  if(!nome||!tel||!email){toast('⚠️ Preencha Nome, Telefone e E-mail.','#B71C1C');return;}
+  if(!pkgSel||!perSel){toast('⚠️ Selecione o Pacote e o Período.','#B71C1C');return;}
+  var msg=montarMensagem();
+  if(navigator.share){
+    navigator.share({title:'Cadastro CPStream',text:msg})
+      .then(function(){enviarEmail();toast('✅ Cadastro enviado!','#1B5E20');})
+      .catch(function(){copiarFallback(msg);});
+  } else { copiarFallback(msg); enviarEmail(); }
+}
+
+function copiarFallback(msg){
+  if(navigator.clipboard) navigator.clipboard.writeText(msg);
+  toast('✅ Cadastro copiado!\nCole no WhatsApp ou e-mail.','#1B5E20');
+}
+
+function enviarEmail(){
+  var equip=getEquip();
+  var dataFmt=g('data')?new Date(g('data')+'T12:00:00').toLocaleDateString('pt-BR'):'Não informada';
+  var params={
+    cliente_nome   : g('nome'),
+    cliente_tel    : g('tel'),
+    cliente_email  : g('email'),
+    data_contrato  : dataFmt,
+    vendedor_nome  : g('ind-nome')||'Não informado',
+    vendedor_pix   : g('ind-pix')||'Não informado',
+    equipamentos   : equip.length?equip.join(', '):'Não informado',
+    pacote_acessos : pkgSel,
+    pacote_periodo : perSel,
+    valor          : formatVal(getValor()),
+    login          : g('login')||'A definir',
+    senha          : g('senha')||'A definir'
+  };
+  emailjs.send(EMAILJS_SERVICE, EMAILJS_TEMPLATE, params)
+    .then(function(){toast('✅ Aviso enviado ao administrador!','#1B5E20');})
+    .catch(function(e){console.log('Email error:',e);});
 }
 
 function limpar(){
   ['nome','tel','email','data','fabricante','login','senha','ind-nome','ind-pix'].forEach(function(id){
-    var el=document.getElementById(id); if(el) el.value='';
+    var el=document.getElementById(id);if(el)el.value='';
   });
   document.querySelectorAll('input[type=checkbox]').forEach(function(c){c.checked=false});
   document.getElementById('outras-row').style.display='none';
   document.querySelectorAll('.pkg-btn,.per-btn').forEach(function(b){b.classList.remove('sel')});
-  pkgSel=''; perSel='';
+  document.getElementById('boleto-section').style.display='none';
+  document.getElementById('qrcode').innerHTML='';
+  pkgSel='';perSel='';perDias='';
   toast('🧹 Formulário limpo. Pronto para novo cadastro!','#0D2B55');
 }
 
 function toast(msg,cor){
   var t=document.getElementById('toast');
-  t.style.background=cor; t.textContent=msg;
+  t.style.background=cor;t.textContent=msg;
   t.className='toast show';
-  setTimeout(function(){t.className='toast'},3500);
+  setTimeout(function(){t.className='toast';},3500);
 }
+
+// Atualiza nome no boleto ao digitar
+document.getElementById('nome').addEventListener('input',function(){
+  if(pkgSel&&perDias) atualizarBoleto();
+});
 </script>
 </body>
 </html>
