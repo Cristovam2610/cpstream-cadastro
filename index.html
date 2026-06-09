@@ -63,6 +63,7 @@ body{font-family:Arial,sans-serif;background:#E8EFF8;min-height:100vh;padding:12
 
 /* BOLETO */
 #boleto-section{display:none;margin-top:12px}
+#boleto-section.ativo{display:block}
 .boleto{background:#fff;border:2px solid #0D2B55;border-radius:10px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,0.15)}
 .boleto-header{background:#0D2B55;padding:12px 14px;display:flex;justify-content:space-between;align-items:center}
 .boleto-header .logo{color:#F9A825;font-size:16px;font-weight:900;letter-spacing:1px}
@@ -187,7 +188,7 @@ body{font-family:Arial,sans-serif;background:#E8EFF8;min-height:100vh;padding:12
     </div>
   </div>
 
-  <!-- BOLETO PIX -->
+  <!-- BOLETO PIX - aparece ao selecionar pacote e periodo -->
   <div id="boleto-section">
     <div class="boleto">
       <div class="boleto-header">
@@ -339,35 +340,43 @@ function crc16(str){
 
 function atualizarBoleto(){
   if(!pkgSel||!perDias) return;
-  var valor = getValor();
-  var equip = getEquip();
-  var nome  = document.getElementById('nome').value.trim()||'Cliente';
+  try {
+    var valor = getValor();
+    var equip = getEquip();
+    var nome  = document.getElementById('nome').value.trim()||'Cliente';
 
-  document.getElementById('b-acessos').textContent = pkgSel+' acessos';
-  document.getElementById('b-periodo').textContent = perSel;
-  document.getElementById('b-equip').textContent   = equip.length?equip.join(', '):'Não informado';
-  document.getElementById('b-cliente').textContent = nome.split(' ')[0]||'—';
-  document.getElementById('b-valor').textContent   = formatVal(valor);
+    document.getElementById('b-acessos').textContent = pkgSel+' acessos';
+    document.getElementById('b-periodo').textContent = perSel;
+    document.getElementById('b-equip').textContent   = equip.length?equip.join(', '):'Não informado';
+    document.getElementById('b-cliente').textContent = nome.split(' ')[0]||'—';
+    document.getElementById('b-valor').textContent   = formatVal(valor);
 
-  var payload = pixPayload('criador.mql5@gmail.com', valor, 'CPStream', 'Salvador');
-  document.getElementById('pix-payload').textContent = payload;
+    var payload = pixPayload('criador.mql5@gmail.com', valor, 'CPStream', 'Salvador');
+    document.getElementById('pix-payload').textContent = payload;
 
-  // Gerar QR Code
-  var qrdiv = document.getElementById('qrcode');
-  qrdiv.innerHTML='';
-  new QRCode(qrdiv, {
-    text: payload,
-    width: 180,
-    height: 180,
-    colorDark: '#0D2B55',
-    colorLight: '#FFFFFF',
-    correctLevel: QRCode.CorrectLevel.M
-  });
+    // Gerar QR Code
+    var qrdiv = document.getElementById('qrcode');
+    qrdiv.innerHTML='';
+    try {
+      new QRCode(qrdiv, {
+        text: payload,
+        width: 180,
+        height: 180,
+        colorDark: '#0D2B55',
+        colorLight: '#FFFFFF',
+        correctLevel: QRCode.CorrectLevel.M
+      });
+    } catch(qerr) {
+      qrdiv.innerHTML='<div style="padding:10px;color:#888;font-size:11px;text-align:center">Use o Pix Copia e Cola abaixo</div>';
+    }
 
-  document.getElementById('boleto-section').style.display='block';
-  setTimeout(function(){
-    document.getElementById('boleto-section').scrollIntoView({behavior:'smooth',block:'start'});
-  },100);
+    document.getElementById('boleto-section').classList.add('ativo');
+    setTimeout(function(){
+      document.getElementById('boleto-section').scrollIntoView({behavior:'smooth',block:'start'});
+    },200);
+  } catch(e) {
+    document.getElementById('boleto-section').classList.add('ativo');
+  }
 }
 
 function copiarPix(){
@@ -464,7 +473,7 @@ function limpar(){
   document.querySelectorAll('input[type=checkbox]').forEach(function(c){c.checked=false});
   document.getElementById('outras-row').style.display='none';
   document.querySelectorAll('.pkg-btn,.per-btn').forEach(function(b){b.classList.remove('sel')});
-  document.getElementById('boleto-section').style.display='none';
+  document.getElementById('boleto-section').classList.remove('ativo');
   document.getElementById('qrcode').innerHTML='';
   pkgSel='';perSel='';perDias='';
   toast('🧹 Formulário limpo. Pronto para novo cadastro!','#0D2B55');
