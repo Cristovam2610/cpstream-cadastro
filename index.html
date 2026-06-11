@@ -8,13 +8,20 @@
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:Arial,sans-serif;background:#E8EFF8;min-height:100vh;padding:12px}
 .wrap{max-width:480px;margin:0 auto}
+
+/* HEADER */
 .header{background:#0D2B55;border:2px solid #F9A825;border-radius:10px 10px 0 0;padding:14px 12px 8px;text-align:center}
 .header h1{font-size:19px;font-weight:700;color:#fff}
 .header p{font-size:11px;color:#B8D0F0;margin-top:3px}
 .subbar{background:#1565C0;border:1px solid #F9A825;border-top:none;padding:6px 12px;text-align:center}
 .subbar span{font-size:11px;color:#D6E4F7}
+
+/* SEÇÕES */
 .sec-hdr{background:#0D2B55;color:#fff;font-size:12px;font-weight:700;padding:6px 10px;margin-top:9px;border-radius:6px 6px 0 0}
 .sec-body{border:1px solid #3A7BD5;border-top:none;border-radius:0 0 6px 6px;padding:10px;background:#fff}
+.ind-box{background:#FFF8E1;border:1px solid #F9A825;border-top:none;border-radius:0 0 6px 6px;padding:10px}
+
+/* CAMPOS */
 .field-row{display:flex;align-items:center;gap:6px;margin-bottom:8px}
 .field-row:last-child{margin-bottom:0}
 .field-row label{font-size:11px;font-weight:700;color:#0D2B55;min-width:90px;flex-shrink:0}
@@ -22,54 +29,95 @@ body{font-family:Arial,sans-serif;background:#E8EFF8;min-height:100vh;padding:12
 .field-row input:focus{outline:none;border-color:#0D2B55;background:#fff}
 .row2{display:flex;flex-direction:column;gap:6px;margin-bottom:8px}
 .row2 .field-row{margin-bottom:0}
+
+/* CHECKBOXES */
 .cb-row{display:flex;align-items:flex-start;gap:6px;margin-bottom:8px}
 .cb-row:last-child{margin-bottom:0}
 .cb-lbl{font-size:11px;font-weight:700;color:#0D2B55;min-width:80px;flex-shrink:0;padding-top:6px}
 .cb-group{flex:1;background:#F0F4FB;border:1px solid #3A7BD5;border-radius:5px;padding:6px 8px;display:flex;flex-wrap:wrap;gap:6px 14px}
 .cb-item{display:flex;align-items:center;gap:5px;font-size:12px;color:#111;cursor:pointer}
 .cb-item input[type=checkbox]{width:15px;height:15px;accent-color:#1565C0;cursor:pointer}
+
+/* TABELA DE PREÇOS */
 .price-tbl{width:100%;border-collapse:collapse;font-size:11px;margin-bottom:8px}
 .price-tbl th{background:#1565C0;color:#fff;padding:5px 6px;text-align:center;font-weight:700}
 .price-tbl td{padding:5px 6px;text-align:center;border:1px solid #BBCCE8}
 .price-tbl tr:nth-child(even) td{background:#D6E4F7}
 .price-tbl tr:nth-child(odd) td{background:#fff}
 .price-tbl td:first-child{font-weight:700;color:#1565C0}
-.pix-bar{background:#0D2B55;border:1px solid #F9A825;border-radius:6px;padding:8px 10px;display:flex;justify-content:space-between;align-items:center}
-.pix-bar span:first-child{font-size:11px;color:#fff;font-weight:700}
-.pix-bar span:last-child{font-size:12px;color:#F9A825;font-weight:700}
+.price-tbl .highlight-row td{background:#FFF8E1 !important;font-weight:700;color:#0D2B55}
+.price-tbl .highlight-row td:first-child{color:#E65100}
+
+/* PIX */
+.pix-bar{background:#0D2B55;border:1px solid #F9A825;border-radius:6px;padding:8px 10px;display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px}
+.pix-bar span:first-child{font-size:11px;color:#fff;font-weight:700;flex-shrink:0}
+.pix-key{font-size:12px;color:#F9A825;font-weight:700}
+.btn-pix{background:#F9A825;color:#0D2B55;border:none;border-radius:5px;padding:6px 10px;font-size:11px;font-weight:700;cursor:pointer;white-space:nowrap;flex-shrink:0}
+.btn-pix:active{opacity:0.8}
+
+/* SELEÇÃO DE PACOTE */
 .pkg-sel{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:8px}
 .pkg-btn{border:1px solid #3A7BD5;border-radius:6px;padding:7px;text-align:center;cursor:pointer;background:#F0F4FB;font-size:12px;color:#0D2B55;font-weight:600;transition:all 0.15s;user-select:none}
 .pkg-btn.sel{background:#1565C0;color:#fff;border-color:#1565C0}
-.per-sel{display:flex;gap:6px;flex-wrap:wrap}
+.per-sel{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px}
 .per-btn{border:1px solid #3A7BD5;border-radius:6px;padding:6px 10px;cursor:pointer;background:#F0F4FB;font-size:12px;color:#0D2B55;font-weight:600;flex:1;text-align:center;transition:all 0.15s;user-select:none}
 .per-btn.sel{background:#1565C0;color:#fff;border-color:#1565C0}
 .sub-lbl{font-size:11px;font-weight:700;color:#0D2B55;margin-bottom:6px}
+
+/* RESUMO DA CONTRATAÇÃO */
+.resumo-box{background:#F0F6FF;border:2px solid #1565C0;border-radius:8px;padding:10px;margin-top:4px}
+.resumo-box .resumo-titulo{font-size:12px;font-weight:700;color:#0D2B55;margin-bottom:7px;text-align:center;letter-spacing:0.3px}
+.resumo-linha{display:flex;justify-content:space-between;align-items:center;font-size:11px;padding:3px 0;border-bottom:1px solid #BBCCE8}
+.resumo-linha:last-child{border-bottom:none}
+.resumo-label{color:#555;font-weight:600}
+.resumo-valor{color:#0D2B55;font-weight:700;text-align:right;max-width:55%}
+.resumo-valor.destaque{color:#1565C0;font-size:13px}
+.resumo-status{margin-top:7px;background:#FFF8E1;border:1px solid #F9A825;border-radius:5px;padding:5px 8px;font-size:11px;color:#E65100;font-weight:700;text-align:center}
+
+/* DESTAQUE DESCONTOS */
+.desconto-box{display:flex;gap:6px;margin-bottom:8px}
+.tag-desc{flex:1;border-radius:6px;padding:7px 8px;font-size:10px;font-weight:700;text-align:center;line-height:1.4}
+.tag-mensal{background:#E3F2FD;border:1px solid #1565C0;color:#0D2B55}
+.tag-semi{background:#FFF3E0;border:1px solid #F9A825;color:#E65100}
+.tag-anual{background:#E8F5E9;border:1px solid #388E3C;color:#1B5E20}
+
+/* MISC */
 .note{font-size:10px;color:#555;font-style:italic;margin-bottom:7px;line-height:1.5}
 .notice{background:#D6E4F7;border:1px solid #3A7BD5;border-radius:6px;padding:8px 10px;font-size:11px;color:#0D2B55;text-align:center;line-height:1.6;margin-top:9px}
 .footer-bar{background:#0D2B55;border:1px solid #F9A825;border-radius:6px;padding:8px 10px;display:flex;justify-content:space-around;margin-top:8px;flex-wrap:wrap;gap:4px}
 .footer-bar span{font-size:11px;color:#F9A825;font-weight:700}
 .thanks{text-align:center;font-size:13px;font-weight:700;color:#0D2B55;margin-top:9px;margin-bottom:4px}
+
+/* BOTÕES PRINCIPAIS */
 .btn-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
 .btn-send{background:#0D2B55;color:#fff;border:none;border-radius:8px;padding:13px;font-size:14px;font-weight:700;cursor:pointer;width:100%}
 .btn-send:active{opacity:0.8}
-.btn-clear{background:#fff;color:#C62828;border:2px solid #C62828;border-radius:8px;padding:13px;font-size:14px;font-weight:700;cursor:pointer;width:100%}
+.btn-wpp{background:#25D366;color:#fff;border:none;border-radius:8px;padding:13px;font-size:13px;font-weight:700;cursor:pointer;width:100%}
+.btn-wpp:active{opacity:0.8}
+.btn-clear{background:#fff;color:#C62828;border:2px solid #C62828;border-radius:8px;padding:11px;font-size:13px;font-weight:700;cursor:pointer;width:100%;margin-top:8px}
 .btn-clear:active{opacity:0.75}
+.btn-row3{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px}
+.btn-comissao{background:#FFF8E1;color:#E65100;border:2px solid #F9A825;border-radius:8px;padding:11px;font-size:12px;font-weight:700;cursor:pointer;width:100%}
+.btn-comissao:active{opacity:0.8}
+.btn-copiar-resumo{background:#E3F2FD;color:#0D2B55;border:2px solid #1565C0;border-radius:8px;padding:11px;font-size:12px;font-weight:700;cursor:pointer;width:100%}
+.btn-copiar-resumo:active{opacity:0.8}
+
+/* TOAST */
 .toast{display:none;border-radius:8px;padding:11px 14px;text-align:center;font-size:12px;margin-top:9px;line-height:1.6;font-weight:600;color:#fff}
 .toast.show{display:block}
-.ind-box{background:#FFF8E1;border:1px solid #F9A825;border-radius:0 0 6px 6px;padding:10px}
 </style>
 </head>
 <body>
 <div class="wrap">
 
   <div class="header">
-    <h1>&#128203; Cadastro CPStream</h1>
+    <h1>📋 Cadastro CPStream</h1>
     <p>Formulário de Contratação de Serviço de Streaming</p>
   </div>
   <div class="subbar"><span>Preencha todos os campos e toque em Enviar</span></div>
 
   <!-- DADOS DO CLIENTE -->
-  <div class="sec-hdr">&#128100; DADOS DO CLIENTE</div>
+  <div class="sec-hdr">👤 DADOS DO CLIENTE</div>
   <div class="sec-body">
     <div class="field-row"><label>Nome Completo:</label><input id="nome" type="text" placeholder="Nome e sobrenome"></div>
     <div class="row2">
@@ -80,14 +128,15 @@ body{font-family:Arial,sans-serif;background:#E8EFF8;min-height:100vh;padding:12
   </div>
 
   <!-- INDICAÇÃO / COLABORADOR -->
-  <div class="sec-hdr">&#11088; INDICAÇÃO / COLABORADOR</div>
+  <div class="sec-hdr">⭐ INDICAÇÃO / COLABORADOR</div>
   <div class="ind-box">
-    <div class="field-row"><label>Nome do Vendedor:</label><input id="ind-nome" type="text" placeholder="Nome completo do colaborador"></div>
-    <div class="field-row"><label>PIX do Vendedor:</label><input id="ind-pix" type="text" placeholder="CPF, e-mail, tel ou chave PIX"></div>
+    <div class="field-row"><label>Nome Vendedor:</label><input id="ind-nome" type="text" placeholder="Nome completo do colaborador"></div>
+    <div class="field-row"><label>WhatsApp:</label><input id="ind-wpp" type="tel" placeholder="(71) 9 8000-0000"></div>
+    <div class="field-row"><label>PIX Vendedor:</label><input id="ind-pix" type="text" placeholder="CPF, e-mail, tel ou chave PIX"></div>
   </div>
 
   <!-- EQUIPAMENTOS -->
-  <div class="sec-hdr">&#128250; EQUIPAMENTOS</div>
+  <div class="sec-hdr">📺 EQUIPAMENTOS</div>
   <div class="sec-body">
     <div class="cb-row">
       <span class="cb-lbl">Smart TV:</span>
@@ -110,48 +159,63 @@ body{font-family:Arial,sans-serif;background:#E8EFF8;min-height:100vh;padding:12
     </div>
   </div>
 
-  <!-- PACOTES -->
-  <div class="sec-hdr">&#128176; PACOTES DISPONÍVEIS</div>
+  <!-- PACOTES DISPONÍVEIS -->
+  <div class="sec-hdr">💰 PACOTES DISPONÍVEIS</div>
   <div class="sec-body">
+    <div class="desconto-box">
+      <div class="tag-desc tag-mensal">📅 MENSAL<br>Valor normal</div>
+      <div class="tag-desc tag-semi">🔥 SEMESTRAL<br>ECONOMIZE 20%</div>
+      <div class="tag-desc tag-anual">⭐ ANUAL<br>MELHOR PLANO<br>30% OFF</div>
+    </div>
     <table class="price-tbl">
       <tr><th>Acessos</th><th>1 Mês / 30d</th><th>6 Meses / 180d</th><th>1 Ano / 365d</th></tr>
       <tr><td>1</td><td>R$ 13,00</td><td>R$ 62,40</td><td>R$ 109,20</td></tr>
       <tr><td>2</td><td>R$ 20,00</td><td>R$ 96,00</td><td>R$ 168,00</td></tr>
       <tr><td>3</td><td>R$ 30,00</td><td>R$ 144,00</td><td>R$ 252,00</td></tr>
       <tr><td>4</td><td>R$ 36,00</td><td>R$ 172,80</td><td>R$ 302,40</td></tr>
-      <tr><td>5 ⭐</td><td>R$ 45,00</td><td>R$ 216,00</td><td>R$ 378,00</td></tr>
+      <tr class="highlight-row"><td>5 ⭐</td><td>R$ 45,00</td><td>R$ 216,00</td><td>R$ 378,00</td></tr>
     </table>
-    <div class="notice" style="margin-top:8px">
-      🔥 Plano Semestral: 20% de desconto<br>
-      ⭐ Plano Anual: 30% de desconto e melhor custo-benefício
-    </div>
     <div class="pix-bar">
-      <span>&#128179; Pagamento via PIX:</span>
-      <span>criador.mql5@gmail.com</span>
+      <span>🏦 PIX:</span>
+      <span class="pix-key">criador.mql5@gmail.com</span>
+      <button class="btn-pix" onclick="copiarPix()">📋 COPIAR PIX</button>
     </div>
   </div>
 
   <!-- PACOTE CONTRATADO -->
-  <div class="sec-hdr">&#9989; PACOTE CONTRATADO</div>
+  <div class="sec-hdr">✅ PACOTE CONTRATADO</div>
   <div class="sec-body">
     <div class="sub-lbl">Nº de Acessos:</div>
     <div class="pkg-sel">
-      <div class="pkg-btn" onclick="selPkg(this,'1')">1 acesso</div>
-      <div class="pkg-btn" onclick="selPkg(this,'2')">2 acessos</div>
-      <div class="pkg-btn" onclick="selPkg(this,'3')">3 acessos</div>
-      <div class="pkg-btn" onclick="selPkg(this,'4')">4 acessos</div>
-      <div class="pkg-btn" onclick="selPkg(this,'5')">5 acessos ⭐</div>
+      <div class="pkg-btn" onclick="selPkg(this,'1',13)">1 acesso</div>
+      <div class="pkg-btn" onclick="selPkg(this,'2',20)">2 acessos</div>
+      <div class="pkg-btn" onclick="selPkg(this,'3',30)">3 acessos</div>
+      <div class="pkg-btn" onclick="selPkg(this,'4',36)">4 acessos</div>
+      <div class="pkg-btn" onclick="selPkg(this,'5',45)">5 acessos ⭐</div>
     </div>
     <div class="sub-lbl">Período:</div>
     <div class="per-sel">
-      <div class="per-btn" onclick="selPer(this,'1 Mês (30 dias)')">1 Mês</div>
-      <div class="per-btn" onclick="selPer(this,'6 Meses (180 dias)')">6 Meses 🔥 20% OFF</div>
-      <div class="per-btn" onclick="selPer(this,'1 Ano (365 dias)')">1 Ano ⭐ 30% OFF</div>
+      <div class="per-btn" onclick="selPer(this,'1 Mês (30 dias)',1,0)">1 Mês</div>
+      <div class="per-btn" onclick="selPer(this,'6 Meses (180 dias)',6,0.20)">6 Meses 🔥 20% OFF</div>
+      <div class="per-btn" onclick="selPer(this,'1 Ano (365 dias)',12,0.30)">1 Ano ⭐ 30% OFF</div>
+    </div>
+
+    <!-- RESUMO DA CONTRATAÇÃO -->
+    <div class="resumo-box" id="resumo-box" style="display:none">
+      <div class="resumo-titulo">📄 RESUMO DA CONTRATAÇÃO</div>
+      <div class="resumo-linha"><span class="resumo-label">Cliente:</span><span class="resumo-valor" id="r-nome">—</span></div>
+      <div class="resumo-linha"><span class="resumo-label">Telefone:</span><span class="resumo-valor" id="r-tel">—</span></div>
+      <div class="resumo-linha"><span class="resumo-label">Plano:</span><span class="resumo-valor" id="r-plano">—</span></div>
+      <div class="resumo-linha"><span class="resumo-label">Período:</span><span class="resumo-valor" id="r-periodo">—</span></div>
+      <div class="resumo-linha"><span class="resumo-label">Valor:</span><span class="resumo-valor destaque" id="r-valor">—</span></div>
+      <div class="resumo-linha"><span class="resumo-label">Data Contrat.:</span><span class="resumo-valor" id="r-data">—</span></div>
+      <div class="resumo-linha"><span class="resumo-label">Vencimento:</span><span class="resumo-valor" id="r-venc">—</span></div>
+      <div class="resumo-status" id="r-status">⏳ AGUARDANDO PIX</div>
     </div>
   </div>
 
   <!-- CREDENCIAIS -->
-  <div class="sec-hdr">&#128272; CREDENCIAIS DE ACESSO</div>
+  <div class="sec-hdr">🔐 CREDENCIAIS DE ACESSO</div>
   <div class="sec-body">
     <p class="note">Senha: 8–12 caracteres com Maiúscula, minúscula, número e especial ( @ . % $ # ? ! )</p>
     <div class="row2">
@@ -160,113 +224,306 @@ body{font-family:Arial,sans-serif;background:#E8EFF8;min-height:100vh;padding:12
     </div>
   </div>
 
-  <div class="notice">&#8505;&#65039; Acesso enviado por <strong>WhatsApp ou e-mail</strong> após confirmação do <strong>PIX</strong></div>
+  <div class="notice">ℹ️ Acesso enviado por <strong>WhatsApp ou e-mail</strong> após confirmação do <strong>PIX</strong></div>
 
   <div class="footer-bar">
-    <span>&#128231; criador.mql5@gmail.com</span>
-    <span>&#128241; (71) 9 8534-4834</span>
+    <span>📧 criador.mql5@gmail.com</span>
+    <span>📱 (71) 9 8534-4834</span>
   </div>
 
-  <div class="thanks">Obrigado por contratar nossos serviços! &#128591;</div>
+  <div class="thanks">Obrigado por contratar nossos serviços! 🙏</div>
 
+  <!-- BOTÕES PRINCIPAIS -->
   <div class="btn-row">
-    <button class="btn-send" onclick="enviar()">&#128228; Enviar</button>
-    <button class="btn-clear" onclick="limpar()">&#10006; Limpar</button>
+    <button class="btn-send" onclick="enviarAdmin()">📨 Enviar Admin</button>
+    <button class="btn-wpp" onclick="enviarWhatsApp()">💬 WhatsApp</button>
   </div>
+  <div class="btn-row3">
+    <button class="btn-copiar-resumo" onclick="copiarResumo()">📋 Copiar Resumo</button>
+    <button class="btn-comissao" onclick="gerarComissao()">⭐ Comissão Vendedor</button>
+  </div>
+  <button class="btn-clear" onclick="limpar()">✖ Limpar Formulário</button>
 
   <div class="toast" id="toast"></div>
 
 </div>
 
 <script>
-var pkgSel='', perSel='';
+// ─── ESTADO ─────────────────────────────────────────────────────────
+var pkgSel='', perSel='', pkgValBase=0, perMeses=0, perDesc=0;
+var PIX_KEY = 'criador.mql5@gmail.com';
+var WPP_NUM = '5571985344834';
 
-function selPkg(el,v){
+// Mapa de valores finais
+var PRECOS = {
+  '1': {1:13.00,   6:62.40,  12:109.20},
+  '2': {1:20.00,   6:96.00,  12:168.00},
+  '3': {1:30.00,   6:144.00, 12:252.00},
+  '4': {1:36.00,   6:172.80, 12:302.40},
+  '5': {1:45.00,   6:216.00, 12:378.00}
+};
+
+// ─── ESTRUTURA DO CLIENTE (pronta para integração futura) ─────────────
+// Campos: cliente, telefone, email, plano, valor, dataContratacao,
+//         dataVencimento, vendedor, vendedorWpp, vendedorPix, status
+// STATUS: 'ATIVO' | 'AGUARDANDO PIX' | 'VENCENDO' | 'VENCIDO'
+// Integração futura: Google Sheets / Firebase / Supabase / SQL
+
+// ─── SELEÇÃO DE PACOTE ───────────────────────────────────────────────
+function selPkg(el, v, valBase) {
   document.querySelectorAll('.pkg-btn').forEach(function(b){b.classList.remove('sel')});
-  el.classList.add('sel'); pkgSel=v;
-}
-function selPer(el,v){
-  document.querySelectorAll('.per-btn').forEach(function(b){b.classList.remove('sel')});
-  el.classList.add('sel'); perSel=v;
+  el.classList.add('sel');
+  pkgSel = v;
+  pkgValBase = valBase;
+  atualizarResumo();
 }
 
-document.getElementById('cb-outras').addEventListener('change',function(){
-  document.getElementById('outras-row').style.display=this.checked?'flex':'none';
+function selPer(el, v, meses, desc) {
+  document.querySelectorAll('.per-btn').forEach(function(b){b.classList.remove('sel')});
+  el.classList.add('sel');
+  perSel = v;
+  perMeses = meses;
+  perDesc = desc;
+  atualizarResumo();
+}
+
+// ─── ATUALIZAR RESUMO ────────────────────────────────────────────────
+function atualizarResumo() {
+  if (!pkgSel || !perMeses) return;
+  var box = document.getElementById('resumo-box');
+  box.style.display = 'block';
+
+  var nomeCli = document.getElementById('nome').value.trim() || '—';
+  var telCli  = document.getElementById('tel').value.trim()  || '—';
+  var dataStr = document.getElementById('data').value;
+
+  var mesesKey = perMeses === 1 ? 1 : (perMeses === 6 ? 6 : 12);
+  var valor = PRECOS[pkgSel] ? PRECOS[pkgSel][mesesKey] : 0;
+
+  var dataContrat = dataStr ? new Date(dataStr + 'T12:00:00') : new Date();
+  var dataVenc = new Date(dataContrat);
+  var diasAdd = perMeses === 1 ? 30 : (perMeses === 6 ? 180 : 365);
+  dataVenc.setDate(dataVenc.getDate() + diasAdd);
+
+  document.getElementById('r-nome').textContent   = nomeCli;
+  document.getElementById('r-tel').textContent    = telCli;
+  document.getElementById('r-plano').textContent  = pkgSel + ' acesso' + (pkgSel > 1 ? 's' : '');
+  document.getElementById('r-periodo').textContent = perSel;
+  document.getElementById('r-valor').textContent  = 'R$ ' + valor.toFixed(2).replace('.',',');
+  document.getElementById('r-data').textContent   = dataContrat.toLocaleDateString('pt-BR');
+  document.getElementById('r-venc').textContent   = dataVenc.toLocaleDateString('pt-BR');
+}
+
+// Atualizar resumo ao digitar nome/tel/data
+['nome','tel','data'].forEach(function(id) {
+  document.getElementById(id).addEventListener('input', function(){
+    if (pkgSel && perMeses) atualizarResumo();
+  });
 });
 
-function g(id){return document.getElementById(id).value.trim();}
+// ─── UTILITÁRIOS ─────────────────────────────────────────────────────
+document.getElementById('cb-outras').addEventListener('change', function(){
+  document.getElementById('outras-row').style.display = this.checked ? 'flex' : 'none';
+});
 
-function enviar(){
-  var nome=g('nome'), tel=g('tel'), email=g('email'), data=g('data');
-  var indNome=g('ind-nome'), indPix=g('ind-pix');
-  if(!nome||!tel||!email){
-    toast('⚠️ Preencha Nome, Telefone e E-mail antes de enviar.','#B71C1C'); return;
-  }
-  if(!pkgSel||!perSel){
-    toast('⚠️ Selecione o Pacote e o Período contratado.','#B71C1C'); return;
-  }
-  var tvs=[...document.querySelectorAll('#tv-group input:checked')].map(function(c){return c.value}).join(', ');
-  var fab=g('fabricante');
-  var disp=[];
-  if(document.getElementById('cb-pc').checked) disp.push('PC/Notebook Win 10/11');
-  if(document.getElementById('cb-cel').checked) disp.push('Celular Android');
-  var dataFmt=data?new Date(data+'T12:00:00').toLocaleDateString('pt-BR'):'Não informada';
+function g(id){ return document.getElementById(id).value.trim(); }
 
-  var msg='📋 *CADASTRO CPSTREAM*\n';
-  msg+='━━━━━━━━━━━━━━━━━━━\n';
-  msg+='👤 *DADOS DO CLIENTE*\n';
-  msg+='• Nome: '+nome+'\n';
-  msg+='• Tel/Zap: '+tel+'\n';
-  msg+='• E-mail: '+email+'\n';
-  msg+='• Data Contratação: '+dataFmt+'\n\n';
-  if(indNome||indPix){
-    msg+='⭐ *INDICAÇÃO / COLABORADOR*\n';
-    if(indNome) msg+='• Vendedor: '+indNome+'\n';
-    if(indPix)  msg+='• PIX Vendedor: '+indPix+'\n';
-    msg+='\n';
-  }
-  msg+='📺 *EQUIPAMENTOS*\n';
-  msg+='• Smart TV: '+(tvs||'Nenhuma')+(fab?' ('+fab+')':'')+'\n';
-  msg+='• Dispositivos: '+(disp.length?disp.join(', '):'Nenhum')+'\n\n';
-  msg+='✅ *PACOTE CONTRATADO*\n';
-  msg+='• Acessos: '+pkgSel+'\n';
-  msg+='• Período: '+perSel+'\n\n';
-  msg+='🔐 *CREDENCIAIS*\n';
-  msg+='• Login: '+(g('login')||'A definir')+'\n';
-  msg+='• Senha: '+(g('senha')||'A definir')+'\n';
-  msg+='━━━━━━━━━━━━━━━━━━━';
-
-  if(navigator.share){
-    navigator.share({title:'Cadastro CPStream',text:msg})
-      .then(function(){toast('✅ Cadastro enviado com sucesso!','#1B5E20')})
-      .catch(function(){copiar(msg)});
-  } else { copiar(msg); }
+function fmtData(str){
+  if (!str) return 'Não informada';
+  return new Date(str + 'T12:00:00').toLocaleDateString('pt-BR');
 }
 
-function copiar(txt){
-  if(navigator.clipboard){
+function calcVenc() {
+  var dataStr = g('data');
+  var base = dataStr ? new Date(dataStr + 'T12:00:00') : new Date();
+  var dias = perMeses === 1 ? 30 : (perMeses === 6 ? 180 : 365);
+  var venc = new Date(base);
+  venc.setDate(venc.getDate() + dias);
+  return venc.toLocaleDateString('pt-BR');
+}
+
+function getValor() {
+  if (!pkgSel || !perMeses) return '—';
+  var k = perMeses === 1 ? 1 : (perMeses === 6 ? 6 : 12);
+  var v = PRECOS[pkgSel] ? PRECOS[pkgSel][k] : 0;
+  return 'R$ ' + v.toFixed(2).replace('.', ',');
+}
+
+function validar() {
+  var nome = g('nome'), tel = g('tel'), email = g('email');
+  if (!nome || !tel || !email) {
+    toast('⚠️ Preencha Nome, Telefone e E-mail antes de enviar.', '#B71C1C'); return false;
+  }
+  if (!pkgSel || !perSel) {
+    toast('⚠️ Selecione o Pacote e o Período contratado.', '#B71C1C'); return false;
+  }
+  return true;
+}
+
+function montarDados() {
+  var tvs = [...document.querySelectorAll('#tv-group input:checked')].map(function(c){return c.value}).join(', ');
+  var fab = g('fabricante');
+  var disp = [];
+  if (document.getElementById('cb-pc').checked)  disp.push('PC/Notebook Win 10/11');
+  if (document.getElementById('cb-cel').checked) disp.push('Celular Android');
+  return {
+    nome:     g('nome'),
+    tel:      g('tel'),
+    email:    g('email'),
+    data:     fmtData(g('data')),
+    login:    g('login') || 'A definir',
+    senha:    g('senha') || 'A definir',
+    tvs:      tvs || 'Nenhuma',
+    fab:      fab,
+    disp:     disp.length ? disp.join(', ') : 'Nenhum',
+    acessos:  pkgSel,
+    periodo:  perSel,
+    valor:    getValor(),
+    venc:     calcVenc(),
+    vendNome: g('ind-nome'),
+    vendWpp:  g('ind-wpp'),
+    vendPix:  g('ind-pix')
+  };
+}
+
+// ─── COPIAR PIX ──────────────────────────────────────────────────────
+function copiarPix() {
+  navigator.clipboard.writeText(PIX_KEY)
+    .then(function(){ toast('✅ Chave PIX copiada!\n' + PIX_KEY, '#1565C0'); })
+    .catch(function(){ toast('Chave PIX: ' + PIX_KEY, '#1565C0'); });
+}
+
+// ─── MENSAGEM ADMIN ──────────────────────────────────────────────────
+function montarMsgAdmin(d) {
+  var msg = '🔔 *NOVA CONTRATAÇÃO CPSTREAM*\n';
+  msg += '━━━━━━━━━━━━━━━━━━━\n';
+  msg += '👤 *DADOS DO CLIENTE*\n';
+  msg += '• Cliente: ' + d.nome + '\n';
+  msg += '• Telefone: ' + d.tel + '\n';
+  msg += '• E-mail: ' + d.email + '\n';
+  msg += '• Data: ' + d.data + '\n\n';
+  msg += '✅ *PLANO CONTRATADO*\n';
+  msg += '• Plano: ' + d.acessos + ' acesso' + (d.acessos > 1 ? 's' : '') + '\n';
+  msg += '• Período: ' + d.periodo + '\n';
+  msg += '• Valor: ' + d.valor + '\n';
+  msg += '• Vencimento: ' + d.venc + '\n\n';
+  msg += '📺 *EQUIPAMENTOS*\n';
+  msg += '• Smart TV: ' + d.tvs + (d.fab ? ' (' + d.fab + ')' : '') + '\n';
+  msg += '• Dispositivos: ' + d.disp + '\n\n';
+  msg += '🔐 *CREDENCIAIS*\n';
+  msg += '• Login: ' + d.login + '\n';
+  msg += '• Senha: ' + d.senha + '\n\n';
+  if (d.vendNome || d.vendWpp) {
+    msg += '⭐ *VENDEDOR*\n';
+    if (d.vendNome) msg += '• Nome: ' + d.vendNome + '\n';
+    if (d.vendWpp)  msg += '• WhatsApp: ' + d.vendWpp + '\n';
+    if (d.vendPix)  msg += '• PIX: ' + d.vendPix + '\n';
+    msg += '\n';
+  }
+  msg += '⏳ *Status: Aguardando pagamento PIX*\n';
+  msg += '🏦 PIX: ' + PIX_KEY + '\n';
+  msg += '━━━━━━━━━━━━━━━━━━━';
+  return msg;
+}
+
+// ─── ENVIAR ADMIN (copiar/compartilhar) ──────────────────────────────
+function enviarAdmin() {
+  if (!validar()) return;
+  var d = montarDados();
+  var msg = montarMsgAdmin(d);
+  if (navigator.share) {
+    navigator.share({title: 'Cadastro CPStream', text: msg})
+      .then(function(){ toast('✅ Cadastro enviado!', '#1B5E20'); })
+      .catch(function(){ copiarTexto(msg); });
+  } else {
+    copiarTexto(msg);
+  }
+}
+
+// ─── ENVIAR VIA WHATSAPP ─────────────────────────────────────────────
+function enviarWhatsApp() {
+  if (!validar()) return;
+  var d = montarDados();
+  var msg = montarMsgAdmin(d);
+  var url = 'https://wa.me/' + WPP_NUM + '?text=' + encodeURIComponent(msg);
+  window.open(url, '_blank');
+}
+
+// ─── COPIAR RESUMO ───────────────────────────────────────────────────
+function copiarResumo() {
+  if (!validar()) return;
+  var d = montarDados();
+  var txt = '📋 RESUMO CPStream\n';
+  txt += '━━━━━━━━━━━━━━━━━\n';
+  txt += 'Cliente: ' + d.nome + '\n';
+  txt += 'Telefone: ' + d.tel + '\n';
+  txt += 'Plano: ' + d.acessos + ' acesso' + (d.acessos > 1 ? 's' : '') + '\n';
+  txt += 'Período: ' + d.periodo + '\n';
+  txt += 'Valor: ' + d.valor + '\n';
+  txt += 'Data Contratação: ' + d.data + '\n';
+  txt += 'Vencimento: ' + d.venc + '\n';
+  txt += 'Status: Aguardando PIX\n';
+  txt += 'PIX: ' + PIX_KEY;
+  copiarTexto(txt);
+}
+
+// ─── COMISSÃO DO VENDEDOR ────────────────────────────────────────────
+function gerarComissao() {
+  if (!validar()) return;
+  var vendNome = g('ind-nome');
+  if (!vendNome) { toast('⚠️ Informe o nome do vendedor primeiro.', '#B71C1C'); return; }
+  var d = montarDados();
+  var dataBase = g('data') ? new Date(g('data') + 'T12:00:00') : new Date();
+  var dataPagComis = new Date(dataBase);
+  dataPagComis.setDate(dataPagComis.getDate() + 8);
+
+  var msg = '⭐ *COMISSÃO CPSTREAM*\n';
+  msg += '━━━━━━━━━━━━━━━━━\n';
+  msg += '• Vendedor: ' + d.vendNome + '\n';
+  if (d.vendWpp) msg += '• WhatsApp: ' + d.vendWpp + '\n';
+  if (d.vendPix) msg += '• PIX: ' + d.vendPix + '\n';
+  msg += '• Cliente: ' + d.nome + '\n';
+  msg += '• Plano: ' + d.acessos + ' acesso' + (d.acessos > 1 ? 's' : '') + ' / ' + d.periodo + '\n';
+  msg += '• Valor da Venda: ' + d.valor + '\n';
+  msg += '• Data da Venda: ' + d.data + '\n';
+  msg += '• Pagamento comissão previsto: ' + dataPagComis.toLocaleDateString('pt-BR') + '\n';
+  msg += '━━━━━━━━━━━━━━━━━';
+
+  copiarTexto(msg, '✅ Resumo de comissão copiado!');
+}
+
+// ─── COPIAR TEXTO ─────────────────────────────────────────────────────
+function copiarTexto(txt, msg) {
+  var m = msg || '✅ Copiado!\nCole no WhatsApp ou e-mail.';
+  if (navigator.clipboard) {
     navigator.clipboard.writeText(txt)
-      .then(function(){toast('✅ Cadastro copiado!\nCole no WhatsApp ou e-mail.','#1B5E20')})
-      .catch(function(){toast('✅ Pronto! Compartilhe pelo celular.','#1B5E20')});
-  } else { toast('✅ Pronto! Compartilhe pelo celular.','#1B5E20'); }
+      .then(function(){ toast(m, '#1B5E20'); })
+      .catch(function(){ toast('✅ Pronto! Compartilhe pelo celular.', '#1B5E20'); });
+  } else {
+    toast('✅ Pronto! Compartilhe pelo celular.', '#1B5E20');
+  }
 }
 
-function limpar(){
-  ['nome','tel','email','data','fabricante','login','senha','ind-nome','ind-pix'].forEach(function(id){
-    var el=document.getElementById(id); if(el) el.value='';
+// ─── LIMPAR ───────────────────────────────────────────────────────────
+function limpar() {
+  ['nome','tel','email','data','fabricante','login','senha','ind-nome','ind-wpp','ind-pix'].forEach(function(id){
+    var el = document.getElementById(id); if (el) el.value = '';
   });
-  document.querySelectorAll('input[type=checkbox]').forEach(function(c){c.checked=false});
-  document.getElementById('outras-row').style.display='none';
-  document.querySelectorAll('.pkg-btn,.per-btn').forEach(function(b){b.classList.remove('sel')});
-  pkgSel=''; perSel='';
-  toast('🧹 Formulário limpo. Pronto para novo cadastro!','#0D2B55');
+  document.querySelectorAll('input[type=checkbox]').forEach(function(c){ c.checked = false; });
+  document.getElementById('outras-row').style.display = 'none';
+  document.querySelectorAll('.pkg-btn,.per-btn').forEach(function(b){ b.classList.remove('sel'); });
+  pkgSel = ''; perSel = ''; pkgValBase = 0; perMeses = 0; perDesc = 0;
+  document.getElementById('resumo-box').style.display = 'none';
+  toast('🧹 Formulário limpo. Pronto para novo cadastro!', '#0D2B55');
 }
 
-function toast(msg,cor){
-  var t=document.getElementById('toast');
-  t.style.background=cor; t.textContent=msg;
-  t.className='toast show';
-  setTimeout(function(){t.className='toast'},3500);
+// ─── TOAST ────────────────────────────────────────────────────────────
+function toast(msg, cor) {
+  var t = document.getElementById('toast');
+  t.style.background = cor;
+  t.textContent = msg;
+  t.className = 'toast show';
+  setTimeout(function(){ t.className = 'toast'; }, 3500);
 }
 </script>
 </body>
