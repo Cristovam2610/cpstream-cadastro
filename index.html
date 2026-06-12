@@ -39,14 +39,15 @@ body{font-family:Arial,sans-serif;background:#E8EFF8;min-height:100vh;padding:12
 .cb-item input[type=checkbox]{width:15px;height:15px;accent-color:#1565C0;cursor:pointer}
 
 /* TABELA DE PREÇOS */
-.price-tbl{width:100%;border-collapse:collapse;font-size:11px;margin-bottom:8px}
+.price-tbl{width:100%;border-collapse:collapse;font-size:11px;margin-bottom:6px}
 .price-tbl th{background:#1565C0;color:#fff;padding:5px 6px;text-align:center;font-weight:700}
-.price-tbl td{padding:5px 6px;text-align:center;border:1px solid #BBCCE8}
+.price-tbl td{padding:5px 6px;text-align:center;border:1px solid #BBCCE8;line-height:1.4}
 .price-tbl tr:nth-child(even) td{background:#D6E4F7}
 .price-tbl tr:nth-child(odd) td{background:#fff}
 .price-tbl td:first-child{font-weight:700;color:#1565C0}
 .price-tbl .highlight-row td{background:#FFF8E1 !important;font-weight:700;color:#0D2B55}
 .price-tbl .highlight-row td:first-child{color:#E65100}
+.price-tbl .min-note{font-size:9px;color:#E65100;font-weight:700;display:block}
 
 /* PIX */
 .pix-bar{background:#0D2B55;border:1px solid #F9A825;border-radius:6px;padding:8px 10px;display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px}
@@ -60,9 +61,10 @@ body{font-family:Arial,sans-serif;background:#E8EFF8;min-height:100vh;padding:12
 .pkg-btn{border:1px solid #3A7BD5;border-radius:6px;padding:7px;text-align:center;cursor:pointer;background:#F0F4FB;font-size:12px;color:#0D2B55;font-weight:600;transition:all 0.15s;user-select:none}
 .pkg-btn.sel{background:#1565C0;color:#fff;border-color:#1565C0}
 .per-sel{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px}
-.per-btn{border:1px solid #3A7BD5;border-radius:6px;padding:6px 10px;cursor:pointer;background:#F0F4FB;font-size:12px;color:#0D2B55;font-weight:600;flex:1;text-align:center;transition:all 0.15s;user-select:none}
+.per-btn{border:1px solid #3A7BD5;border-radius:6px;padding:6px 8px;cursor:pointer;background:#F0F4FB;font-size:11px;color:#0D2B55;font-weight:600;flex:1;text-align:center;transition:all 0.15s;user-select:none;min-width:90px}
 .per-btn.sel{background:#1565C0;color:#fff;border-color:#1565C0}
 .sub-lbl{font-size:11px;font-weight:700;color:#0D2B55;margin-bottom:6px}
+.per-hint{font-size:10px;color:#E65100;font-weight:600;margin:-4px 0 8px;line-height:1.4}
 
 /* RESUMO DA CONTRATAÇÃO */
 .resumo-box{background:#F0F6FF;border:2px solid #1565C0;border-radius:8px;padding:10px;margin-top:4px}
@@ -73,6 +75,17 @@ body{font-family:Arial,sans-serif;background:#E8EFF8;min-height:100vh;padding:12
 .resumo-valor{color:#0D2B55;font-weight:700;text-align:right;max-width:55%}
 .resumo-valor.destaque{color:#1565C0;font-size:13px}
 .resumo-status{margin-top:7px;background:#FFF8E1;border:1px solid #F9A825;border-radius:5px;padding:5px 8px;font-size:11px;color:#E65100;font-weight:700;text-align:center}
+
+/* QR CODE PIX */
+.qr-box{background:#fff;border:2px dashed #1565C0;border-radius:8px;padding:10px;margin-top:9px;text-align:center}
+.qr-box .qr-titulo{font-size:12px;font-weight:700;color:#0D2B55;margin-bottom:8px}
+#qrcode{display:flex;justify-content:center;margin-bottom:8px;min-height:160px;align-items:center}
+#qrcode img{border:4px solid #fff;border-radius:6px;box-shadow:0 0 0 1px #BBCCE8}
+.qr-valor{font-size:14px;font-weight:700;color:#1565C0;margin-bottom:8px}
+.copia-cola-lbl{font-size:10px;color:#555;font-weight:600;margin-bottom:4px;text-align:left}
+.copia-cola{width:100%;font-size:10px;font-family:monospace;padding:6px;border:1px solid #3A7BD5;border-radius:5px;background:#F0F4FB;color:#111;resize:none;height:60px;margin-bottom:8px;word-break:break-all}
+.btn-copia{background:#1565C0;color:#fff;border:none;border-radius:6px;padding:9px;font-size:12px;font-weight:700;cursor:pointer;width:100%}
+.btn-copia:active{opacity:0.8}
 
 /* DESTAQUE DESCONTOS */
 .desconto-box{display:flex;gap:6px;margin-bottom:8px}
@@ -168,13 +181,16 @@ body{font-family:Arial,sans-serif;background:#E8EFF8;min-height:100vh;padding:12
       <div class="tag-desc tag-anual">⭐ ANUAL<br>MELHOR PLANO<br>30% OFF</div>
     </div>
     <table class="price-tbl">
-      <tr><th>Acessos</th><th>1 Mês / 30d</th><th>6 Meses / 180d</th><th>1 Ano / 365d</th></tr>
-      <tr><td>1</td><td>R$ 13,00</td><td>R$ 62,40</td><td>R$ 109,20</td></tr>
-      <tr><td>2</td><td>R$ 20,00</td><td>R$ 96,00</td><td>R$ 168,00</td></tr>
-      <tr><td>3</td><td>R$ 30,00</td><td>R$ 144,00</td><td>R$ 252,00</td></tr>
-      <tr><td>4</td><td>R$ 36,00</td><td>R$ 172,80</td><td>R$ 302,40</td></tr>
-      <tr class="highlight-row"><td>5 ⭐</td><td>R$ 45,00</td><td>R$ 216,00</td><td>R$ 378,00</td></tr>
+      <tr><th>Acessos</th><th>Período Mínimo</th><th>6 Meses / 180d</th><th>1 Ano / 365d</th></tr>
+      <tr><td>1</td><td>3 meses<br><b>R$ 39,00</b><span class="min-note">mínimo 3 meses</span></td><td>R$ 62,40</td><td>R$ 109,20</td></tr>
+      <tr><td>2</td><td>2 meses<br><b>R$ 40,00</b><span class="min-note">mínimo 2 meses</span></td><td>R$ 96,00</td><td>R$ 168,00</td></tr>
+      <tr><td>3</td><td>1 mês<br><b>R$ 30,00</b></td><td>R$ 144,00</td><td>R$ 252,00</td></tr>
+      <tr><td>4</td><td>1 mês<br><b>R$ 36,00</b></td><td>R$ 172,80</td><td>R$ 302,40</td></tr>
+      <tr class="highlight-row"><td>5 ⭐</td><td>1 mês<br><b>R$ 45,00</b></td><td>R$ 216,00</td><td>R$ 378,00</td></tr>
     </table>
+    <div class="notice" style="margin-bottom:8px">
+      ℹ️ Pacotes de <strong>1 acesso</strong> têm contratação mínima de <strong>3 meses</strong> e pacotes de <strong>2 acessos</strong>, mínima de <strong>2 meses</strong>.
+    </div>
     <div class="pix-bar">
       <span>🏦 PIX:</span>
       <span class="pix-key">criador.mql5@gmail.com</span>
@@ -187,18 +203,15 @@ body{font-family:Arial,sans-serif;background:#E8EFF8;min-height:100vh;padding:12
   <div class="sec-body">
     <div class="sub-lbl">Nº de Acessos:</div>
     <div class="pkg-sel">
-      <div class="pkg-btn" onclick="selPkg(this,'1',13)">1 acesso</div>
-      <div class="pkg-btn" onclick="selPkg(this,'2',20)">2 acessos</div>
-      <div class="pkg-btn" onclick="selPkg(this,'3',30)">3 acessos</div>
-      <div class="pkg-btn" onclick="selPkg(this,'4',36)">4 acessos</div>
-      <div class="pkg-btn" onclick="selPkg(this,'5',45)">5 acessos ⭐</div>
+      <div class="pkg-btn" onclick="selPkg(this,'1')">1 acesso</div>
+      <div class="pkg-btn" onclick="selPkg(this,'2')">2 acessos</div>
+      <div class="pkg-btn" onclick="selPkg(this,'3')">3 acessos</div>
+      <div class="pkg-btn" onclick="selPkg(this,'4')">4 acessos</div>
+      <div class="pkg-btn" onclick="selPkg(this,'5')">5 acessos ⭐</div>
     </div>
     <div class="sub-lbl">Período:</div>
-    <div class="per-sel">
-      <div class="per-btn" onclick="selPer(this,'1 Mês (30 dias)',1,0)">1 Mês</div>
-      <div class="per-btn" onclick="selPer(this,'6 Meses (180 dias)',6,0.20)">6 Meses 🔥 20% OFF</div>
-      <div class="per-btn" onclick="selPer(this,'1 Ano (365 dias)',12,0.30)">1 Ano ⭐ 30% OFF</div>
-    </div>
+    <div class="per-hint" id="per-hint" style="display:none"></div>
+    <div class="per-sel" id="per-sel"></div>
 
     <!-- RESUMO DA CONTRATAÇÃO -->
     <div class="resumo-box" id="resumo-box" style="display:none">
@@ -211,6 +224,16 @@ body{font-family:Arial,sans-serif;background:#E8EFF8;min-height:100vh;padding:12
       <div class="resumo-linha"><span class="resumo-label">Data Contrat.:</span><span class="resumo-valor" id="r-data">—</span></div>
       <div class="resumo-linha"><span class="resumo-label">Vencimento:</span><span class="resumo-valor" id="r-venc">—</span></div>
       <div class="resumo-status" id="r-status">⏳ AGUARDANDO PIX</div>
+
+      <!-- QR CODE PIX -->
+      <div class="qr-box">
+        <div class="qr-titulo">💳 Pague com PIX (QR Code)</div>
+        <div id="qrcode"></div>
+        <div class="qr-valor" id="qr-valor">R$ 0,00</div>
+        <div class="copia-cola-lbl">Pix Copia e Cola:</div>
+        <textarea class="copia-cola" id="pix-copia-cola" readonly></textarea>
+        <button class="btn-copia" onclick="copiarPixCopiaCola()">📋 Copiar código PIX</button>
+      </div>
     </div>
   </div>
 
@@ -248,19 +271,46 @@ body{font-family:Arial,sans-serif;background:#E8EFF8;min-height:100vh;padding:12
 
 </div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script>
 // ─── ESTADO ─────────────────────────────────────────────────────────
-var pkgSel='', perSel='', pkgValBase=0, perMeses=0, perDesc=0;
+var pkgSel='', perSel='', perMesesSel=0, perDiasSel=0;
 var PIX_KEY = 'criador.mql5@gmail.com';
 var WPP_NUM = '5571985344834';
+var qrInstance = null;
 
-// Mapa de valores finais
+// ─── TABELA DE PREÇOS ATUALIZADA ──────────────────────────────────────
+// chave do objeto = nº de meses do período / valor = preço final
 var PRECOS = {
-  '1': {1:13.00,   6:62.40,  12:109.20},
-  '2': {1:20.00,   6:96.00,  12:168.00},
-  '3': {1:30.00,   6:144.00, 12:252.00},
-  '4': {1:36.00,   6:172.80, 12:302.40},
-  '5': {1:45.00,   6:216.00, 12:378.00}
+  '1': {3: 39.00,  6: 62.40,  12: 109.20},
+  '2': {2: 40.00,  6: 96.00,  12: 168.00},
+  '3': {1: 30.00,  6: 144.00, 12: 252.00},
+  '4': {1: 36.00,  6: 172.80, 12: 302.40},
+  '5': {1: 45.00,  6: 216.00, 12: 378.00}
+};
+
+// Períodos disponíveis por pacote: {meses, dias, label}
+var PERIODOS = {
+  '1': [
+    {meses:3,  dias:90,  label:'3 Meses'},
+    {meses:6,  dias:180, label:'6 Meses 🔥 20% OFF'},
+    {meses:12, dias:365, label:'1 Ano ⭐ 30% OFF'}
+  ],
+  '2': [
+    {meses:2,  dias:60,  label:'2 Meses'},
+    {meses:6,  dias:180, label:'6 Meses 🔥 20% OFF'},
+    {meses:12, dias:365, label:'1 Ano ⭐ 30% OFF'}
+  ],
+  'default': [
+    {meses:1,  dias:30,  label:'1 Mês'},
+    {meses:6,  dias:180, label:'6 Meses 🔥 20% OFF'},
+    {meses:12, dias:365, label:'1 Ano ⭐ 30% OFF'}
+  ]
+};
+
+var HINTS = {
+  '1': '⚠️ Pacote de 1 acesso: contratação mínima de 3 meses.',
+  '2': '⚠️ Pacote de 2 acessos: contratação mínima de 2 meses.'
 };
 
 // ─── ESTRUTURA DO CLIENTE (pronta para integração futura) ─────────────
@@ -270,26 +320,45 @@ var PRECOS = {
 // Integração futura: Google Sheets / Firebase / Supabase / SQL
 
 // ─── SELEÇÃO DE PACOTE ───────────────────────────────────────────────
-function selPkg(el, v, valBase) {
+function selPkg(el, v) {
   document.querySelectorAll('.pkg-btn').forEach(function(b){b.classList.remove('sel')});
   el.classList.add('sel');
   pkgSel = v;
-  pkgValBase = valBase;
-  atualizarResumo();
+  perSel = ''; perMesesSel = 0; perDiasSel = 0;
+  montarPeriodos(v);
+  document.getElementById('resumo-box').style.display = 'none';
+
+  var hint = document.getElementById('per-hint');
+  if (HINTS[v]) { hint.textContent = HINTS[v]; hint.style.display = 'block'; }
+  else { hint.style.display = 'none'; }
 }
 
-function selPer(el, v, meses, desc) {
+// Monta os botões de período de acordo com o pacote escolhido
+function montarPeriodos(pkg) {
+  var lista = PERIODOS[pkg] || PERIODOS['default'];
+  var box = document.getElementById('per-sel');
+  box.innerHTML = '';
+  lista.forEach(function(p){
+    var btn = document.createElement('div');
+    btn.className = 'per-btn';
+    btn.textContent = p.label;
+    btn.onclick = function(){ selPer(btn, p.label, p.meses, p.dias); };
+    box.appendChild(btn);
+  });
+}
+
+function selPer(el, label, meses, dias) {
   document.querySelectorAll('.per-btn').forEach(function(b){b.classList.remove('sel')});
   el.classList.add('sel');
-  perSel = v;
-  perMeses = meses;
-  perDesc = desc;
+  perSel = label;
+  perMesesSel = meses;
+  perDiasSel = dias;
   atualizarResumo();
 }
 
-// ─── ATUALIZAR RESUMO ────────────────────────────────────────────────
+// ─── ATUALIZAR RESUMO + QR CODE ────────────────────────────────────────
 function atualizarResumo() {
-  if (!pkgSel || !perMeses) return;
+  if (!pkgSel || !perMesesSel) return;
   var box = document.getElementById('resumo-box');
   box.style.display = 'block';
 
@@ -297,13 +366,11 @@ function atualizarResumo() {
   var telCli  = document.getElementById('tel').value.trim()  || '—';
   var dataStr = document.getElementById('data').value;
 
-  var mesesKey = perMeses === 1 ? 1 : (perMeses === 6 ? 6 : 12);
-  var valor = PRECOS[pkgSel] ? PRECOS[pkgSel][mesesKey] : 0;
+  var valor = getValorNumerico();
 
   var dataContrat = dataStr ? new Date(dataStr + 'T12:00:00') : new Date();
   var dataVenc = new Date(dataContrat);
-  var diasAdd = perMeses === 1 ? 30 : (perMeses === 6 ? 180 : 365);
-  dataVenc.setDate(dataVenc.getDate() + diasAdd);
+  dataVenc.setDate(dataVenc.getDate() + perDiasSel);
 
   document.getElementById('r-nome').textContent   = nomeCli;
   document.getElementById('r-tel').textContent    = telCli;
@@ -312,12 +379,14 @@ function atualizarResumo() {
   document.getElementById('r-valor').textContent  = 'R$ ' + valor.toFixed(2).replace('.',',');
   document.getElementById('r-data').textContent   = dataContrat.toLocaleDateString('pt-BR');
   document.getElementById('r-venc').textContent   = dataVenc.toLocaleDateString('pt-BR');
+
+  gerarQrCodePix(valor);
 }
 
 // Atualizar resumo ao digitar nome/tel/data
 ['nome','tel','data'].forEach(function(id) {
   document.getElementById(id).addEventListener('input', function(){
-    if (pkgSel && perMeses) atualizarResumo();
+    if (pkgSel && perMesesSel) atualizarResumo();
   });
 });
 
@@ -336,16 +405,19 @@ function fmtData(str){
 function calcVenc() {
   var dataStr = g('data');
   var base = dataStr ? new Date(dataStr + 'T12:00:00') : new Date();
-  var dias = perMeses === 1 ? 30 : (perMeses === 6 ? 180 : 365);
   var venc = new Date(base);
-  venc.setDate(venc.getDate() + dias);
+  venc.setDate(venc.getDate() + perDiasSel);
   return venc.toLocaleDateString('pt-BR');
 }
 
+function getValorNumerico() {
+  if (!pkgSel || !perMesesSel) return 0;
+  var tabela = PRECOS[pkgSel];
+  return (tabela && tabela[perMesesSel]) ? tabela[perMesesSel] : 0;
+}
+
 function getValor() {
-  if (!pkgSel || !perMeses) return '—';
-  var k = perMeses === 1 ? 1 : (perMeses === 6 ? 6 : 12);
-  var v = PRECOS[pkgSel] ? PRECOS[pkgSel][k] : 0;
+  var v = getValorNumerico();
   return 'R$ ' + v.toFixed(2).replace('.', ',');
 }
 
@@ -386,11 +458,92 @@ function montarDados() {
   };
 }
 
-// ─── COPIAR PIX ──────────────────────────────────────────────────────
+// ─── COPIAR PIX (chave) ────────────────────────────────────────────────
 function copiarPix() {
   navigator.clipboard.writeText(PIX_KEY)
     .then(function(){ toast('✅ Chave PIX copiada!\n' + PIX_KEY, '#1565C0'); })
     .catch(function(){ toast('Chave PIX: ' + PIX_KEY, '#1565C0'); });
+}
+
+// ─── GERAR QR CODE + COPIA E COLA PIX (Payload EMV / BR Code) ──────────
+function crc16(payload) {
+  var crc = 0xFFFF;
+  for (var i = 0; i < payload.length; i++) {
+    crc ^= (payload.charCodeAt(i) << 8);
+    for (var j = 0; j < 8; j++) {
+      if ((crc & 0x8000) !== 0) {
+        crc = ((crc << 1) ^ 0x1021) & 0xFFFF;
+      } else {
+        crc = (crc << 1) & 0xFFFF;
+      }
+    }
+  }
+  var hex = crc.toString(16).toUpperCase();
+  while (hex.length < 4) hex = '0' + hex;
+  return hex;
+}
+
+function emv(id, value) {
+  var len = String(value.length);
+  while (len.length < 2) len = '0' + len;
+  return id + len + value;
+}
+
+function gerarPayloadPix(valor) {
+  var gui    = emv('00', 'br.gov.bcb.pix');
+  var chave  = emv('01', PIX_KEY);
+  var mai    = emv('26', gui + chave);
+  var mcc    = emv('52', '0000');
+  var moeda  = emv('53', '986');
+  var valorF = emv('54', valor.toFixed(2));
+  var pais   = emv('58', 'BR');
+  var nome   = emv('59', 'CPSTREAM');
+  var cidade = emv('60', 'SALVADOR');
+  var txid   = 'CPSTREAM' + Date.now().toString().slice(-8);
+  var adic   = emv('62', emv('05', txid));
+
+  var payload = emv('00','01') + emv('01','11') + mai + mcc + moeda + valorF + pais + nome + cidade + adic + '6304';
+  return payload + crc16(payload);
+}
+
+function gerarQrCodePix(valor) {
+  var qrDiv = document.getElementById('qrcode');
+  document.getElementById('qr-valor').textContent = 'R$ ' + valor.toFixed(2).replace('.', ',');
+
+  if (!valor || valor <= 0) {
+    qrDiv.innerHTML = '';
+    document.getElementById('pix-copia-cola').value = '';
+    return;
+  }
+
+  var payload = gerarPayloadPix(valor);
+  document.getElementById('pix-copia-cola').value = payload;
+
+  qrDiv.innerHTML = '';
+  if (typeof QRCode !== 'undefined') {
+    qrInstance = new QRCode(qrDiv, {
+      text: payload,
+      width: 160,
+      height: 160,
+      colorDark: '#0D2B55',
+      colorLight: '#ffffff'
+    });
+  } else {
+    qrDiv.innerHTML = '<p style="font-size:11px;color:#B71C1C">Não foi possível carregar o QR Code. Use o código Pix Copia e Cola abaixo.</p>';
+  }
+}
+
+function copiarPixCopiaCola() {
+  var txt = document.getElementById('pix-copia-cola').value;
+  if (!txt) { toast('⚠️ Selecione o pacote e o período primeiro.', '#B71C1C'); return; }
+  navigator.clipboard.writeText(txt)
+    .then(function(){ toast('✅ Código Pix copiado!\nCole no app do seu banco.', '#1B5E20'); })
+    .catch(function(){
+      var area = document.getElementById('pix-copia-cola');
+      area.select();
+      document.execCommand('copy');
+      toast('✅ Código Pix copiado!\nCole no app do seu banco.', '#1B5E20');
+    });
 }
 
 // ─── MENSAGEM ADMIN ──────────────────────────────────────────────────
@@ -511,9 +664,13 @@ function limpar() {
   });
   document.querySelectorAll('input[type=checkbox]').forEach(function(c){ c.checked = false; });
   document.getElementById('outras-row').style.display = 'none';
-  document.querySelectorAll('.pkg-btn,.per-btn').forEach(function(b){ b.classList.remove('sel'); });
-  pkgSel = ''; perSel = ''; pkgValBase = 0; perMeses = 0; perDesc = 0;
+  document.querySelectorAll('.pkg-btn').forEach(function(b){ b.classList.remove('sel'); });
+  document.getElementById('per-sel').innerHTML = '';
+  document.getElementById('per-hint').style.display = 'none';
+  pkgSel = ''; perSel = ''; perMesesSel = 0; perDiasSel = 0;
   document.getElementById('resumo-box').style.display = 'none';
+  document.getElementById('qrcode').innerHTML = '';
+  document.getElementById('pix-copia-cola').value = '';
   toast('🧹 Formulário limpo. Pronto para novo cadastro!', '#0D2B55');
 }
 
